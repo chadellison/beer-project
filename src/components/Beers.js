@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import '../App.css';
 
 export default class Beers extends Component {
+  rateBeer() {
+    alert("yo")
+  }
+
   render() {
     return (
       <ul className="beers">
-        <li>beeeeeeer 1</li>
+        <li onClick={this.rateBeer}>beeeeeeer 1</li>
         <li>bee2222r 2</li>
         <li>beeeeer 3</li>
         <li>beeer 4</li>
