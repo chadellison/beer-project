@@ -5,7 +5,7 @@ export default class Header extends Component {
   render() {
     return (
       <p className="App-intro">
-        <strong>Make wise beer selections</strong>
+        <strong>Choose your beer wisely</strong>
       </p>
     )
   }

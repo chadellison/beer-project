@@ -1,7 +1,3 @@
-.App {
-  /*text-align: center;*/
-}
-
 .App-logo {
   animation: App-logo-spin infinite 10s linear;
   height: 80px;
@@ -9,8 +5,7 @@
 }
 
 .App-header {
-  /*background-color: #222;*/
-  background-color: #3d2300;
+  background-color: #281300;
   height: 70px;
   padding: 20px;
   color: white;
@@ -28,8 +23,7 @@
 }
 
 .App-footer {
-  /*background-color: #222;*/
-  background-color: #3d2300;
+  background-color: #281300;
   height: 50px;
   padding: 20px;
   color: white;
@@ -53,37 +47,68 @@ ul li {
 }
 
 .beers li {
-  margin: 10px 1%;
+  margin: 10px;
 }
 
 .nav-bar {
   height: 50px;
-  background-color: #e8b419;
-  color: white;
   font-size: 15px;
   line-height: 50px;
   text-align: left;
+  margin-left: 30px;
 }
 
-.nav-bar ul li {
-  /*display: inline;*/
+.nav-bar ul li a {
   vertical-align: top;
 }
 
 a {
   text-decoration: none;
-  color: white;
+  color: #6d6d6d;
+  font-size: 18px;
+  margin: 10px;
+}
+
+input {
+  margin-left: 20px;
+  padding: 5px;
+  font-size: 15px;
+  border: 1px solid #6d6d6d;
+  outline: none;
 }
 
 a:hover {
-  border-bottom: 2px solid white;
+  border-bottom: 3px solid #6d6d6d;
   padding-bottom: 5px;
 }
 
-li:hover {
-  cursor: pointer;
+p {
+  text-align: center;
 }
 
-p {
+.beer-name, .beer-type, .beer-rating, .beer-image, .rate-beer {
+  padding: 3px;
+}
+
+.rate-beer:hover {
+  background-color: #e8b419;
+}
+
+.rate-beer {
+  background-color: white;
+  margin: 3px;
+  margin-top: 5px;
+  width: 90px;
+  height: 25px;
+  font-weight: bold;
+  outline: none;
+  border: 1px solid gray;
+}
+
+.beer-image {
+  width: 100px;
+}
+
+.beer {
   text-align: center;
 }

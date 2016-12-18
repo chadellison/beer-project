@@ -8,12 +8,12 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <ul className="nav-bar">
-        <li><a href="#" onClick={this.handleDropdown}>beer type</a></li>
-        <li><a href="#" onClick={this.handleDropdown}>sort beers</a></li>
-        <li><a href="#" onClick={this.handleDropdown}>add a beer</a></li>
-        <li><input placeholder="search beers"></input></li>
-      </ul>
+      <div className="nav-bar">
+        <a href="#" onClick={this.handleDropdown}>beer type</a>
+        <a href="#" onClick={this.handleDropdown}>sort beers</a>
+        <a href="#" onClick={this.handleDropdown}>add a beer</a>
+        <input placeholder="search beers"></input>
+      </div>
     )
   }
 }
