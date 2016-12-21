@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import Dropdown from './dropdown.js';
 
 export default class Nav extends Component {
   handleDropdown() {
@@ -8,12 +9,12 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <div className="nav-bar">
-        <a href="#" onClick={this.handleDropdown}>beer type</a>
-        <a href="#" onClick={this.handleDropdown}>sort beers</a>
-        <a href="#" onClick={this.handleDropdown}>add a beer</a>
+      <ul className="nav-bar">
+        <li><a href="#"><Dropdown /></a></li>
+        <li><a href="#" onClick={this.handleDropdown}>sort beers</a></li>
+        <li><a href="#" onClick={this.handleDropdown}>add a beer</a></li>
         <input placeholder="search beers"></input>
-      </div>
+      </ul>
     )
   }
 }

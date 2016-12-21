@@ -6,6 +6,8 @@ import Intro from './components/Intro.js';
 import Beers from './components/Beers.js';
 import Nav from './components/Nav.js';
 import Footer from './components/Footer.js';
+import Dropdown from './components/dropdown.js';
+
 
 class App extends Component {
   render() {
