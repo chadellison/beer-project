@@ -9,6 +9,7 @@ export default class Dropdown extends Component {
     this.selectStout = this.selectStout.bind(this);
     this.selectLager = this.selectLager.bind(this);
     this.selectBelgian = this.selectBelgian.bind(this);
+    this.selectAllBeers = this.selectAllBeers.bind(this);
     this.state = {
       menuActive: false,
       beerType: "All Beers"
@@ -46,11 +47,18 @@ export default class Dropdown extends Component {
     })
   }
 
+  selectAllBeers() {
+    this.setState({
+      beerType: "All Beers"
+    })
+  }
+
   render() {
     let menu;
     if(this.state.menuActive) {
       menu = <div className="menu">
                <ul>
+                 <li onClick = { this.selectAllBeers }>All Beers</li>
                  <li onClick = { this.selectIpa }>IPAs</li>
                  <li onClick = { this.selectStout }>Stouts</li>
                  <li onClick = { this.selectLager }>Lagers</li>
