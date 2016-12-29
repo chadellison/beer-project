@@ -13,9 +13,8 @@ export default class Dropdown extends Component {
   }
 
   toggleMenu() {
-    let menuState = !this.state.menuActive;
     this.setState({
-      menuActive: menuState
+      menuActive: !this.state.menuActive
     });
   }
 
