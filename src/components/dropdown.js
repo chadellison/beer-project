@@ -19,22 +19,24 @@ export default class Dropdown extends Component {
     });
   }
 
-  handleSelectedBeer() {
-    debugger;
+  handleSelectedBeer(e) {
+    let value = e.currentTarget.textContent
     this.setState({
-      type: this.refs.IPAs.textContent
+      type: value
     })
   }
 
   render() {
     let menu;
+    let beers = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
     if(this.state.menuActive) {
-      let beers = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
       let self = this
       menu = <div className="menu">
                <ul>
                  { beers.map(function (beer) {
-                   return (<li key={beer} ref={beer} onClick = { self.handleSelectedBeer }>{beer}</li>)
+                   return (
+                     <li key={beer} onClick = { self.handleSelectedBeer }>{beer}</li>
+                   )
                  })}
                </ul>
              </div>
