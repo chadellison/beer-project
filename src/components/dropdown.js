@@ -5,14 +5,10 @@ export default class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.selectIpa = this.selectIpa.bind(this);
-    this.selectStout = this.selectStout.bind(this);
-    this.selectLager = this.selectLager.bind(this);
-    this.selectBelgian = this.selectBelgian.bind(this);
-    this.selectAllBeers = this.selectAllBeers.bind(this);
+    this.handleSelectedBeer = this.handleSelectedBeer.bind(this);
     this.state = {
       menuActive: false,
-      beerType: "All Beers"
+      type: "All Beers"
     };
   }
 
@@ -23,46 +19,23 @@ export default class Dropdown extends Component {
     });
   }
 
-  selectIpa() {
+  handleSelectedBeer() {
+    debugger;
     this.setState({
-      beerType: "IPAs"
-    })
-  }
-
-  selectStout() {
-    this.setState({
-      beerType: "Stouts"
-    })
-  }
-
-  selectLager() {
-    this.setState({
-      beerType: "Lagers"
-    })
-  }
-
-  selectBelgian() {
-    this.setState({
-      beerType: "Belgians"
-    })
-  }
-
-  selectAllBeers() {
-    this.setState({
-      beerType: "All Beers"
+      type: this.refs.IPAs.textContent
     })
   }
 
   render() {
     let menu;
     if(this.state.menuActive) {
+      let beers = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
+      let self = this
       menu = <div className="menu">
                <ul>
-                 <li onClick = { this.selectAllBeers }>All Beers</li>
-                 <li onClick = { this.selectIpa }>IPAs</li>
-                 <li onClick = { this.selectStout }>Stouts</li>
-                 <li onClick = { this.selectLager }>Lagers</li>
-                 <li onClick = { this.selectBelgian }>Belgiansssssssss</li>
+                 { beers.map(function (beer) {
+                   return (<li key={beer} ref={beer} onClick = { self.handleSelectedBeer }>{beer}</li>)
+                 })}
                </ul>
              </div>
     } else {
@@ -70,7 +43,7 @@ export default class Dropdown extends Component {
     }
     return (
       <li onClick = { this.toggleMenu } >
-        {this.state.beerType}
+        {this.state.type}
         {menu}
       </li>
     )
