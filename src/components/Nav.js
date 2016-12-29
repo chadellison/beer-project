@@ -57,15 +57,25 @@ export default class Nav extends Component {
   newBeerForm() {
     return(
       <div className="menu">
-        <p>beers</p>
+        <h5>beers</h5>
         <input></input>
+        <h5>name</h5>
         <input></input>
+        <h5>type</h5>
         <input></input>
+        <h5>rating</h5>
         <input></input>
         <button onClick={this.submitNewBeer}>Submit</button>
         <button onClick={this.cancel}>Cancel</button>
       </div>
     )
+  }
+
+  searchBeers(e) {
+    let queryText = e.currentTarget.value
+    alert("performing search on " + queryText)
+    // ajax request
+    // reset beers on dom
   }
 
   render() {
@@ -91,7 +101,7 @@ export default class Nav extends Component {
         <li><a href="#" onClick={this.handleNewBeer}>add a beer</a></li>
         <li><a href="#" onClick={this.sortByRank}>sort beers</a></li>
         {beerSubmissionForm}
-        <input placeholder="search beers"></input>
+        <input placeholder="search beers" onChange={this.searchBeers}></input>
         {notification}
       </ul>
     )
