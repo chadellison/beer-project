@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import '../App.css';
 
 export default class Beers extends Component {
+  constructor(props) {
+    super(props)
+    this.singleBeer = this.singleBeer.bind(this)
+    this.state = {
+      beers: props.beers
+    }
+  }
+
   rateBeer() {
     alert("rate this beer")
   }
@@ -19,37 +27,14 @@ export default class Beers extends Component {
   }
 
   render() {
+    let self = this
     return (
       <ul className="beers">
-        <li>{this.singleBeer("url", "down town brown", 4, "Brown ale")}</li>
-        <li>{this.singleBeer("url", "chocolate delight", 3.7, "Porter")}</li>
-        <li>{this.singleBeer("url", "coffee stout", 4.2, "Stout")}</li>
-        <li>{this.singleBeer("url", "1620", 3.2, "Lager")}</li>
-        <li>{this.singleBeer("url", "Renegade Blues", 4.6, "IPA")}</li>
-        <li>{this.singleBeer("url", "Bomber", 2.2, "Lager")}</li>
-        <li>{this.singleBeer("url", "Three philosophers", 3.2, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
-        <li>{this.singleBeer("url", "The Reverence", 4.8, "Belgian")}</li>
+        { this.state.beers.map(function (beer) {
+          return (
+            <li key={beer}>{self.singleBeer(beer[0], beer[1], beer[2], beer[3])}</li>
+          )
+        })}
       </ul>
     )
   }
