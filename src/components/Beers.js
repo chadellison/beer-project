@@ -5,9 +5,6 @@ export default class Beers extends Component {
   constructor(props) {
     super(props)
     this.singleBeer = this.singleBeer.bind(this)
-    this.state = {
-      beers: props.beers
-    }
   }
 
   rateBeer() {
@@ -30,9 +27,9 @@ export default class Beers extends Component {
     let self = this
     return (
       <ul className="beers">
-        { this.state.beers.map(function (beer) {
+        { this.props.beers.map(function (beer, index) {
           return (
-            <li key={beer}>{self.singleBeer(beer[0], beer[1], beer[2], beer[3])}</li>
+            <li key={index}>{self.singleBeer(beer.image, beer.name, beer.rating, beer.type)}</li>
           )
         })}
       </ul>

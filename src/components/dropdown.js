@@ -5,10 +5,10 @@ export default class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.handleSelectedBeer = this.handleSelectedBeer.bind(this);
+    this.handleSelectedBeerType = this.handleSelectedBeerType.bind(this);
     this.state = {
       menuActive: false,
-      type: "All Beers"
+      beerType: "All beers",
     };
   }
 
@@ -18,23 +18,21 @@ export default class Dropdown extends Component {
     });
   }
 
-  handleSelectedBeer(e) {
+  handleSelectedBeerType(e) {
     let value = e.currentTarget.textContent
-    this.setState({
-      type: value
-    })
+    this.props.fetchBeers(value)
+    this.setState({beerType: value})
   }
 
   render() {
     let menu;
-    let beers = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
     if(this.state.menuActive) {
       let self = this
       menu = <div className="menu">
                <ul>
-                 { beers.map(function (beer) {
+                 { this.props.beerTypes.map(function (beer, index) {
                    return (
-                     <li key={beer} onClick = { self.handleSelectedBeer }>{beer}</li>
+                     <li key={index} onClick={self.handleSelectedBeerType}>{beer}</li>
                    )
                  })}
                </ul>
@@ -43,8 +41,8 @@ export default class Dropdown extends Component {
       menu = "";
     }
     return (
-      <li onClick = { this.toggleMenu } >
-        {this.state.type}
+      <li onClick={this.toggleMenu} >
+        {this.state.beerType}
         {menu}
       </li>
     )

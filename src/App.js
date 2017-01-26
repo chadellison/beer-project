@@ -14,39 +14,65 @@ import Footer from './components/Footer.js';
 class App extends Component {
   constructor(props) {
     super(props)
-    this.fetchBeers = this.fetchBeers.bind(this)
+    this.fetchBeers = this.fetchBeers.bind(this);
+    this.beerTypes = this.beerTypes.bind(this);
+    this.state = {
+      beers: [],
+      beerTypes: []
+    }
   }
 
-  fetchBeers() {
+  // look into context
+  // contextTypes {
+  //   beerType:
+  // }
+
+  componentWillMount() {
+    this.fetchBeers()
+    this.beerTypes()
+  }
+
+  beerTypes() {
+    // api call
+    let types = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
+
+    this.setState({
+      beerTypes: types
+    })
+  }
+
+  fetchBeers(type) {
     // let params = e.currentTarget.value
-    return(
-      [
-        ["url", "down town brown", 4, "Brown ale"],
-        ["url", "chocolate delight", 3.7, "Porter"],
-        ["url", "coffee stout", 4.2, "Stout"],
-        ["url", "1620", 3.2, "Lager"],
-        ["url", "Renegade Blues", 4.6, "IPA"],
-        ["url", "Bomber", 2.2, "Lager"],
-        ["url", "Three philosophers", 3.2, "Belgian"],
-        ["url", "The Reverence", 4.8, "Belgian"],
-        ["url", "The yolo", 4.8, "Belgian"],
-        ["url", "The beer", 4.8, "Belgian"],
-        ["url", "The thing", 4.8, "Belgian"],
-        ["url", "That", 4.8, "Belgian"],
-        ["url", "This beer", 4.8, "Belgian"],
-        ["url", "Crunch", 4.8, "Belgian"],
-        ["url", "Spicy", 4.8, "Belgian"],
-      ]
-    )
+    let beers = [
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 3, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 5, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
+      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"}
+    ]
+    if (type === "IPAs") {
+      beers = [{image: "url", name: "this", rating: 9, type: "IPA"}]
+    }
+
+    this.setState({
+      beers: beers
+    })
   }
 
   render() {
     return (
       <div className="App">
         <Header />
-        <Nav />
+        <Nav fetchBeers={this.fetchBeers} beerTypes={this.state.beerTypes} />
         <Intro />
-        <Beers beers={this.fetchBeers()} />
+        <Beers beers={this.state.beers} />
         <Footer />
       </div>
     );

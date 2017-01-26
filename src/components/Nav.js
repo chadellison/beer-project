@@ -97,7 +97,7 @@ export default class Nav extends Component {
     }
     return (
       <ul className="nav-bar">
-        <li><a href="#"><Dropdown /></a></li>
+        <li><a href="#"><Dropdown fetchBeers={this.props.fetchBeers} beerTypes={this.props.beerTypes} /></a></li>
         <li><a href="#" onClick={this.handleNewBeer}>add a beer</a></li>
         <li><a href="#" onClick={this.sortByRank}>sort beers</a></li>
         {beerSubmissionForm}
