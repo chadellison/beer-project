@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import '../App.css'
 
 export default class SingleBeer extends Component {
+  rateBeer() {
+    alert("rate this beer")
+  }
+
   render() {
     return (
       <div className="beer">

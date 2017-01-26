@@ -3,10 +3,6 @@ import '../App.css'
 import SingleBeer from './SingleBeer'
 
 export default class Beers extends Component {
-  rateBeer() {
-    alert("rate this beer")
-  }
-
   render() {
     let self = this
     return (
