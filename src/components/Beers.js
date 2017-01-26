@@ -1,26 +1,10 @@
-import React, { Component } from 'react';
-import '../App.css';
+import React, { Component } from 'react'
+import '../App.css'
+import SingleBeer from './SingleBeer'
 
 export default class Beers extends Component {
-  constructor(props) {
-    super(props)
-    this.singleBeer = this.singleBeer.bind(this)
-  }
-
   rateBeer() {
     alert("rate this beer")
-  }
-
-  singleBeer(image, name, rating, type) {
-    return (
-      <div className="beer">
-        <img className="beer-image" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTLgFs_rSTVl48wtFvqrloD_Ci1mLQRz_B9WExrrUnPCdjbD81Lhg"></img>
-        <div className="beer-name"><strong>Name:</strong> {name}</div>
-        <div className="beer-type"><strong>Type:</strong> {type}</div>
-        <div className="beer-rating"><strong>Rating:</strong> {rating}</div>
-        <button className="rate-beer" onClick={this.rateBeer}>{"Rate"}</button>
-      </div>
-    )
   }
 
   render() {
@@ -29,7 +13,7 @@ export default class Beers extends Component {
       <ul className="beers">
         { this.props.beers.map(function (beer, index) {
           return (
-            <li key={index}>{self.singleBeer(beer.image, beer.name, beer.rating, beer.type)}</li>
+            <li key={index}><SingleBeer image={beer.image} name={beer.name} rating={beer.rating} type={beer.type} /></li>
           )
         })}
       </ul>

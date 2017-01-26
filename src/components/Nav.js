@@ -5,11 +5,13 @@ import Dropdown from './Dropdown.js';
 export default class Nav extends Component {
   constructor(props) {
     super(props)
-    this.handleNewBeer = this.handleNewBeer.bind(this);
-    this.submitNewBeer = this.submitNewBeer.bind(this);
-    this.cancel = this.cancel.bind(this);
-    this.newBeerForm = this.newBeerForm.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
+    this.handleNewBeer = this.handleNewBeer.bind(this)
+    this.submitNewBeer = this.submitNewBeer.bind(this)
+    this.cancel = this.cancel.bind(this)
+    this.newBeerForm = this.newBeerForm.bind(this)
+    this.closeNotification = this.closeNotification.bind(this)
+    this.searchBeers = this.searchBeers.bind(this)
+    this.sortByRank = this.sortByRank.bind(this)
     this.state = {
       menuActive: false,
       submissionNotification: false
@@ -26,16 +28,9 @@ export default class Nav extends Component {
 
   submitNewBeer() {
     this.setState({
-      menuActive: false
-    }),
-    this.setState({
+      menuActive: false,
       submissionNotification: true
     })
-    // if all required fields
-      // post request
-      // change state of "validBeerSubmission"
-    // else
-      // alert("Please fill in all required fields")
   }
 
   cancel() {
@@ -51,7 +46,7 @@ export default class Nav extends Component {
   }
 
   sortByRank() {
-    alert("Sorting your beers")
+    this.props.fetchBeers({sort: true})
   }
 
   newBeerForm() {
@@ -73,9 +68,7 @@ export default class Nav extends Component {
 
   searchBeers(e) {
     let queryText = e.currentTarget.value
-    alert("performing search on " + queryText)
-    // ajax request
-    // reset beers on dom
+    this.props.fetchBeers({text: queryText})
   }
 
   render() {

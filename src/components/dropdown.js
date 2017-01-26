@@ -8,7 +8,7 @@ export default class Dropdown extends Component {
     this.handleSelectedBeerType = this.handleSelectedBeerType.bind(this);
     this.state = {
       menuActive: false,
-      beerType: "All beers",
+      beerType: "All Beers",
     };
   }
 
@@ -20,7 +20,7 @@ export default class Dropdown extends Component {
 
   handleSelectedBeerType(e) {
     let value = e.currentTarget.textContent
-    this.props.fetchBeers(value)
+    this.props.fetchBeers({type: value})
     this.setState({beerType: value})
   }
 

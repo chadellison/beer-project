@@ -18,14 +18,13 @@ class App extends Component {
     this.beerTypes = this.beerTypes.bind(this);
     this.state = {
       beers: [],
-      beerTypes: []
+      beerTypes: [],
+      type: "",
+      text: "",
+      sort: false,
+      searchParams: {}
     }
   }
-
-  // look into context
-  // contextTypes {
-  //   beerType:
-  // }
 
   componentWillMount() {
     this.fetchBeers()
@@ -33,7 +32,6 @@ class App extends Component {
   }
 
   beerTypes() {
-    // api call
     let types = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
 
     this.setState({
@@ -41,8 +39,7 @@ class App extends Component {
     })
   }
 
-  fetchBeers(type) {
-    // let params = e.currentTarget.value
+  fetchBeers(params={}) {
     let beers = [
       {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
       {image: "url", name: "downtownbrown", rating: 3, type: "Brown ale"},
@@ -57,12 +54,24 @@ class App extends Component {
       {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
       {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"}
     ]
-    if (type === "IPAs") {
+    if (params.type !== undefined) {
       beers = [{image: "url", name: "this", rating: 9, type: "IPA"}]
+      this.setState({type: params.type})
+    }
+
+    if (params.text !== undefined) {
+      beers = [{image: "url", name: "abc", rating: 4, type: "stout"}]
+      this.setState({text: params.text})
+    }
+
+    if (params.sort !== undefined) {
+      beers = [{image: "url", name: "first beer", rating: 5, type: "lager"}]
+      this.setState({sort: params.sort})
     }
 
     this.setState({
-      beers: beers
+      beers: beers,
+      searchParams: {type: this.state.type, text: this.state.text, sort: this.state.sort}
     })
   }
 
