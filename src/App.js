@@ -41,37 +41,36 @@ class App extends Component {
   }
 
   fetchBeers(params={}) {
-    let beers = [
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 3, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 5, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"},
-      {image: "url", name: "downtownbrown", rating: 4, type: "Brown ale"}
-    ]
+    fetch("http://localhost:3001/api/v1/beers", {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        beers: responseJson.beer
+      })
+    })
+    .catch((error) => {
+      alert(error);
+    })
+
     if (params.type !== undefined) {
-      beers = [{image: "url", name: "this", rating: 9, type: "IPA"}]
       this.setState({type: params.type})
     }
 
     if (params.text !== undefined) {
-      beers = [{image: "url", name: "abc", rating: 4, type: "stout"}]
       this.setState({text: params.text})
     }
 
     if (params.sort !== undefined) {
-      beers = [{image: "url", name: "first beer", rating: 5, type: "lager"}]
       this.setState({sort: params.sort})
     }
 
     this.setState({
-      beers: beers,
       searchParams: {type: this.state.type, text: this.state.text, sort: this.state.sort}
     })
   }
