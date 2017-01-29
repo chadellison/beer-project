@@ -19,7 +19,7 @@ class App extends Component {
     this.state = {
       beers: [],
       beerTypes: [],
-      type: "",
+      type: "All Beers",
       text: "",
       sort: false,
       searchParams: {}
@@ -32,6 +32,7 @@ class App extends Component {
   }
 
   beerTypes() {
+    // combine 'All Beers' with the return value of the api call into one array
     let types = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
 
     this.setState({
