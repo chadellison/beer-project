@@ -21,8 +21,7 @@ class App extends Component {
       beerTypes: [],
       type: "All Beers",
       text: "",
-      sort: false,
-      // searchParams: {}
+      sort: false
     }
   }
 
@@ -33,7 +32,7 @@ class App extends Component {
 
   beerTypes() {
     // combine 'All Beers' with the return value of the api call into one array
-    let types = ["All Beers", "IPA", "Stouts", "Lagers", "Belgians"]
+    let types = ["All Beers", "IPA", "Stout", "Lager", "Belgian"]
 
     this.setState({
       beerTypes: types
@@ -67,18 +66,6 @@ class App extends Component {
     .catch((error) => {
       alert(error);
     })
-
-    // if (params.type !== undefined) {
-    //   this.setState({type: params.type})
-    // }
-    //
-    // if (params.text !== undefined) {
-    //   this.setState({text: params.text})
-    // }
-    //
-    // if (params.sort !== undefined) {
-    //   this.setState({sort: params.sort})
-    // }
 
     this.setState({
       type: params.type,
