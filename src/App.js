@@ -22,7 +22,7 @@ class App extends Component {
       type: "All Beers",
       text: "",
       sort: false,
-      searchParams: {}
+      // searchParams: {}
     }
   }
 
@@ -33,7 +33,7 @@ class App extends Component {
 
   beerTypes() {
     // combine 'All Beers' with the return value of the api call into one array
-    let types = ["All Beers", "IPAs", "Stouts", "Lagers", "Belgians"]
+    let types = ["All Beers", "IPA", "Stouts", "Lagers", "Belgians"]
 
     this.setState({
       beerTypes: types
@@ -41,7 +41,17 @@ class App extends Component {
   }
 
   fetchBeers(params={}) {
-    fetch("http://localhost:3001/api/v1/beers", {
+    if (params.type === undefined) {
+      params.type = this.state.type
+    }
+
+    if (params.text === undefined) {
+      params.text = this.state.text
+    }
+
+    let searchParams = "type=" + params.type.toLowerCase() + "&" + "text=" + params.text.toLowerCase()
+
+    fetch("http://localhost:3001/api/v1/beers?" + searchParams, {
       method: "GET",
       headers: {
         'Accept': 'application/json',
@@ -58,20 +68,22 @@ class App extends Component {
       alert(error);
     })
 
-    if (params.type !== undefined) {
-      this.setState({type: params.type})
-    }
-
-    if (params.text !== undefined) {
-      this.setState({text: params.text})
-    }
-
-    if (params.sort !== undefined) {
-      this.setState({sort: params.sort})
-    }
+    // if (params.type !== undefined) {
+    //   this.setState({type: params.type})
+    // }
+    //
+    // if (params.text !== undefined) {
+    //   this.setState({text: params.text})
+    // }
+    //
+    // if (params.sort !== undefined) {
+    //   this.setState({sort: params.sort})
+    // }
 
     this.setState({
-      searchParams: {type: this.state.type, text: this.state.text, sort: this.state.sort}
+      type: params.type,
+      text: params.text,
+      sort: this.state.sort
     })
   }
 
