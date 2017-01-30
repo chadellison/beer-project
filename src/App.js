@@ -15,7 +15,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.fetchBeers = this.fetchBeers.bind(this);
-    this.beerTypes = this.beerTypes.bind(this);
+    this.fetchBeerTypes = this.fetchBeerTypes.bind(this);
     this.state = {
       beers: [],
       beerTypes: [],
@@ -27,15 +27,25 @@ class App extends Component {
 
   componentWillMount() {
     this.fetchBeers()
-    this.beerTypes()
+    this.fetchBeerTypes()
   }
 
-  beerTypes() {
-    // combine 'All Beers' with the return value of the api call into one array
-    let types = ["All Beers", "IPA", "Stout", "Lager", "Belgian"]
-
-    this.setState({
-      beerTypes: types
+  fetchBeerTypes() {
+    fetch("http://localhost:3001/api/v1/beer_types", {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        beerTypes: responseJson.types
+      })
+    })
+    .catch((error) => {
+      alert(error);
     })
   }
 

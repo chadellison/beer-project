@@ -9,7 +9,12 @@ export default class Beers extends Component {
       <ul className="beers">
         { this.props.beers.map(function (beer, index) {
           return (
-            <li key={index}><SingleBeer image={beer.image} name={beer.name} rating={beer.rating} type={beer.type} /></li>
+            <li key={index}><SingleBeer
+                              image={beer.image}
+                              name={beer.name}
+                              rating={beer.rating}
+                              type={beer.beer_type} />
+            </li>
           )
         })}
       </ul>
