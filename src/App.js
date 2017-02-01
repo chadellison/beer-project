@@ -58,7 +58,14 @@ class App extends Component {
       params.text = this.state.text
     }
 
-    let searchParams = "type=" + params.type.toLowerCase() + "&" + "text=" + params.text.toLowerCase()
+    if (params.sort === undefined) {
+      params.sort = this.state.sort
+    }
+
+    let searchParams = "type=" +
+                        params.type.toLowerCase() +
+                        "&" + "text=" + params.text.toLowerCase() +
+                        "&" + "sort=" + params.sort
 
     fetch("http://localhost:3001/api/v1/beers?" + searchParams, {
       method: "GET",
@@ -80,7 +87,7 @@ class App extends Component {
     this.setState({
       type: params.type,
       text: params.text,
-      sort: this.state.sort
+      sort: params.sort
     })
   }
 
