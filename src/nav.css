@@ -22,6 +22,7 @@ input {
   display: block;
   color: black;
   padding: 15px;
+  margin-right: 50px;
 }
 
 .menu li:hover {
@@ -31,9 +32,9 @@ input {
 .menu {
   margin-top: 15px;
   border: 1px solid gray;
-  width: 230px;
-  max-height: 900px;
+  width: 240px;
+  max-height: 500px;
   position: absolute;
-  padding-right: 50px;
   background-color: white;
+  overflow: scroll;
 }

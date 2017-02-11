@@ -1,0 +1,18 @@
+.submitBeerMenu li {
+  display: block;
+  color: black;
+  padding: 15px;
+}
+
+.submitBeerMenu li:hover {
+  border-bottom: 3px solid #d65302;
+}
+
+.submitBeerMenu {
+  margin-top: 15px;
+  border: 1px solid gray;
+  width: 280px;
+  max-height: 900px;
+  position: absolute;
+  background-color: white;
+}

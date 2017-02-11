@@ -8,7 +8,7 @@ export default class BeerForm extends Component {
 
   render() {
     return(
-      <div className="menu">
+      <div className="submitBeerMenu">
         <h5>beers</h5>
         <input></input>
         <h5>name</h5>
