@@ -8,6 +8,15 @@ ul li {
   vertical-align: top;
 }
 
+Dropdown AddBeer Sort {
+  display: inline-block;
+  vertical-align: top;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  margin: 10px;
+}
+
 a {
   text-decoration: none;
   color: white;

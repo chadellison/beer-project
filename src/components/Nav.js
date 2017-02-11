@@ -1,14 +1,17 @@
-import React, { Component } from 'react';
-import '../App.css';
-import Dropdown from './Dropdown.js';
+import React, { Component } from 'react'
+import '../App.css'
+import Dropdown from './Dropdown.js'
+import BeerForm from "./BeerForm.js"
+import AddBeer from "./AddBeer.js"
+import Sort from "./Sort.js"
+import Search from "./Search.js"
 
 export default class Nav extends Component {
   constructor(props) {
     super(props)
     this.handleNewBeer = this.handleNewBeer.bind(this)
     this.submitNewBeer = this.submitNewBeer.bind(this)
-    this.cancel = this.cancel.bind(this)
-    this.newBeerForm = this.newBeerForm.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
     this.closeNotification = this.closeNotification.bind(this)
     this.searchBeers = this.searchBeers.bind(this)
     this.sortByRank = this.sortByRank.bind(this)
@@ -23,6 +26,10 @@ export default class Nav extends Component {
       this.setState({
         menuActive: true
       })
+    } else {
+      this.setState({
+        menuActive: false
+      })
     }
   }
 
@@ -33,7 +40,7 @@ export default class Nav extends Component {
     })
   }
 
-  cancel() {
+  handleCancel() {
     this.setState({
       menuActive: false
     })
@@ -49,35 +56,19 @@ export default class Nav extends Component {
     this.props.fetchBeers({sort: true})
   }
 
-  newBeerForm() {
-    return(
-      <div className="menu">
-        <h5>beers</h5>
-        <input></input>
-        <h5>name</h5>
-        <input></input>
-        <h5>type</h5>
-        <input></input>
-        <h5>rating</h5>
-        <input></input>
-        <button onClick={this.submitNewBeer}>Submit</button>
-        <button onClick={this.cancel}>Cancel</button>
-      </div>
-    )
-  }
-
   searchBeers(e) {
     let queryText = e.currentTarget.value
     this.props.fetchBeers({text: queryText})
   }
 
   render() {
-    let beerSubmissionForm;
-    let notification;
+    let beerSubmissionForm = ""
+    let notification = ""
     if(this.state.menuActive) {
-      beerSubmissionForm = this.newBeerForm()
-    } else {
-      beerSubmissionForm = "";
+      beerSubmissionForm = <BeerForm
+                             submitNewBeer={this.submitNewBeer}
+                             handleCancel={this.handleCancel}
+                           />
     }
 
     if(this.state.submissionNotification) {
@@ -85,16 +76,15 @@ export default class Nav extends Component {
                        <h3>"Your submission is pending approval. Cheers!"</h3>
                        <button onClick={this.closeNotification}>OK, Got it!</button>
                      </div>
-    } else {
-      notification = ""
     }
+
     return (
       <ul className="nav-bar">
-        <li><a href="#"><Dropdown fetchBeers={this.props.fetchBeers} beerTypes={this.props.beerTypes} /></a></li>
-        <li><a href="#" onClick={this.handleNewBeer}>add a beer</a></li>
-        <li><a href="#" onClick={this.sortByRank}>sort beers</a></li>
+        <Dropdown fetchBeers={this.props.fetchBeers} beerTypes={this.props.beerTypes} />
+        <AddBeer handleNewBeer={this.handleNewBeer} />
+        <Sort sortByRank={this.sortByRank} />
         {beerSubmissionForm}
-        <input placeholder="search beers" onChange={this.searchBeers}></input>
+        <Search searchBeers={this.searchBeers} />
         {notification}
       </ul>
     )

@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import '../App.css'
+import BeerTypes from "./BeerTypes.js"
 
 export default class Dropdown extends Component {
   constructor(props) {
     super(props);
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.handleSelectedBeerType = this.handleSelectedBeerType.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this)
+    this.handleSelectedBeerType = this.handleSelectedBeerType.bind(this)
     this.state = {
       menuActive: false,
-      beerType: "All Beers",
+      beerType: "all beers",
     };
   }
 
@@ -25,26 +26,20 @@ export default class Dropdown extends Component {
   }
 
   render() {
-    let menu;
+    let menu = ""
     if(this.state.menuActive) {
       let self = this
-      menu = <div className="menu">
-               <ul>
-                 { this.props.beerTypes.map(function (beer, index) {
-                   return (
-                     <li key={index} onClick={self.handleSelectedBeerType}>{beer}</li>
-                   )
-                 })}
-               </ul>
-             </div>
-    } else {
-      menu = "";
+      menu = <BeerTypes
+               beerTypes={this.props.beerTypes}
+               handleSelectedBeerType={this.handleSelectedBeerType}
+             />
     }
+
     return (
-      <li onClick={this.toggleMenu} >
+      <a href="#" onClick={this.toggleMenu}>
         {this.state.beerType}
         {menu}
-      </li>
+      </a>
     )
   }
 }
