@@ -1,7 +1,6 @@
 .submitBeerMenu li {
   display: block;
   color: black;
-  /*padding: 15px;*/
 }
 
 .submitBeerMenu li:hover {
@@ -9,7 +8,6 @@
 }
 
 .submitBeerMenu {
-  /*margin-top: 15px;*/
   border: 1px solid gray;
   width: 280px;
   max-height: 500px;
