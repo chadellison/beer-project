@@ -9,16 +9,15 @@ export default class BeerForm extends Component {
   render() {
     return(
       <div className="submitBeerMenu">
-        <h5>beers</h5>
+        <h4>Submit Beer</h4>
+        <h5 className="label">name</h5>
         <input></input>
-        <h5>name</h5>
+        <h5 className="label">type</h5>
         <input></input>
-        <h5>type</h5>
+        <h5 className="label">rating</h5>
         <input></input>
-        <h5>rating</h5>
-        <input></input>
-        <button onClick={this.props.submitNewBeer}>Submit</button>
-        <button onClick={this.props.handleCancel}>Cancel</button>
+        <button className="submit" onClick={this.props.submitNewBeer}>Submit</button>
+        <button className="cancel" onClick={this.props.handleCancel}>Cancel</button>
       </div>
     )
   }
