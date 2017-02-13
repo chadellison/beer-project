@@ -1,4 +1,4 @@
-.nav-bar {
+.navBar {
   height: 50px;
   font-size: 15px;
   text-align: left;
@@ -6,7 +6,7 @@
   margin-top: 90px;
 }
 
-.nav-bar li {
+.navBar li {
   line-height: 35px;
 }
 
@@ -16,25 +16,4 @@ input {
   font-size: 15px;
   border: 1px solid #6d6d6d;
   outline: none;
-}
-
-.menu li {
-  display: block;
-  color: black;
-  padding: 15px;
-  margin-right: 50px;
-}
-
-.menu li:hover {
-  border-bottom: 3px solid #d65302;
-}
-
-.menu {
-  margin-top: 15px;
-  border: 1px solid gray;
-  width: 240px;
-  max-height: 500px;
-  position: absolute;
-  background-color: white;
-  overflow: scroll;
 }

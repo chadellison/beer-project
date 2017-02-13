@@ -1,10 +1,10 @@
-.beer-profile {
+.beerProfile {
   width: 100%;
   height: 230px;
   z-index: -1;
 }
 
-.App-intro {
+.appIntro {
   font-size: large;
   margin-top: 50px;
   color: #222;
@@ -15,15 +15,15 @@
   width: 280px;
 }
 
-.beer-name, .beer-type, .beer-rating, .beer-image, .rate-beer {
+.beerName, .beerType, .beerRating, .beerImage, .rateBeer {
   padding: 3px;
 }
 
-.rate-beer:hover {
+.rateBeer:hover {
   background-color: #e2d9ce;
 }
 
-.rate-beer {
+.rateBeer {
   background-color: white;
   margin: 3px;
   margin-top: 5px;
@@ -35,7 +35,7 @@
   border-bottom: 5px solid #d65302;
 }
 
-.beer-image {
+.beerImage {
   width: 100px;
 }
 

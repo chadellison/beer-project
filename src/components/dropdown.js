@@ -5,18 +5,10 @@ import BeerTypes from "./BeerTypes.js"
 export default class Dropdown extends Component {
   constructor(props) {
     super(props);
-    this.toggleMenu = this.toggleMenu.bind(this)
     this.handleSelectedBeerType = this.handleSelectedBeerType.bind(this)
     this.state = {
-      menuActive: false,
-      beerType: "all beers",
+      beerType: "all beers"
     };
-  }
-
-  toggleMenu() {
-    this.setState({
-      menuActive: !this.state.menuActive
-    });
   }
 
   handleSelectedBeerType(e) {
@@ -27,7 +19,7 @@ export default class Dropdown extends Component {
 
   render() {
     let menu = ""
-    if(this.state.menuActive) {
+    if(this.props.menuActive) {
       let self = this
       menu = <BeerTypes
                beerTypes={this.props.beerTypes}
@@ -36,7 +28,7 @@ export default class Dropdown extends Component {
     }
 
     return (
-      <a href="#" onClick={this.toggleMenu}>
+      <a href="#" onClick={this.props.toggleMenu}>
         {this.state.beerType}
         {menu}
       </a>

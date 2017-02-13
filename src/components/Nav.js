@@ -5,6 +5,7 @@ import BeerForm from "./BeerForm.js"
 import AddBeer from "./AddBeer.js"
 import Sort from "./Sort.js"
 import Search from "./Search.js"
+import NewBeerNotification from "./NewBeerNotification.js"
 
 export default class Nav extends Component {
   constructor(props) {
@@ -15,34 +16,45 @@ export default class Nav extends Component {
     this.closeNotification = this.closeNotification.bind(this)
     this.searchBeers = this.searchBeers.bind(this)
     this.sortByRank = this.sortByRank.bind(this)
+    this.toggleBeerTypeMenu = this.toggleBeerTypeMenu.bind(this)
     this.state = {
-      menuActive: false,
+      newBeerMenuActive: false,
+      beerTypeMenuActive: false,
       submissionNotification: false
     }
   }
 
   handleNewBeer() {
-    if(!this.state.menuActive) {
-      this.setState({
-        menuActive: true
-      })
+    let newBeer = ""
+    if(!this.state.newBeerMenuActive) {
+      newBeer = true
     } else {
-      this.setState({
-        menuActive: false
-      })
+      newBeer = false
     }
+
+    this.setState({
+      newBeerMenuActive: newBeer,
+      beerTypeMenuActive: false
+    })
   }
 
   submitNewBeer() {
     this.setState({
-      menuActive: false,
+      newBeerMenuActive: false,
       submissionNotification: true
     })
   }
 
+  toggleBeerTypeMenu() {
+    this.setState({
+      beerTypeMenuActive: !this.state.beerTypeMenuActive,
+      newBeerMenuActive: false
+    });
+  }
+
   handleCancel() {
     this.setState({
-      menuActive: false
+      newBeerMenuActive: false
     })
   }
 
@@ -74,7 +86,7 @@ export default class Nav extends Component {
   render() {
     let beerSubmissionForm = ""
     let notification = ""
-    if(this.state.menuActive) {
+    if(this.state.newBeerMenuActive) {
       beerSubmissionForm = <BeerForm
                              submitNewBeer={this.submitNewBeer}
                              handleCancel={this.handleCancel}
@@ -82,15 +94,20 @@ export default class Nav extends Component {
     }
 
     if(this.state.submissionNotification) {
-      notification = <div className="notification">
-                       <h3>"Your submission is pending approval. Cheers!"</h3>
-                       <button onClick={this.closeNotification}>OK, Got it!</button>
-                     </div>
+      notification = <NewBeerNotification
+                       closeNotification={this.closeNotification}
+                     />
     }
 
     return (
-      <ul className="nav-bar">
-        <Dropdown fetchBeers={this.props.fetchBeers} beerTypes={this.props.beerTypes} />
+      <ul className="navBar">
+        <Dropdown
+          fetchBeers={this.props.fetchBeers}
+          beerTypes={this.props.beerTypes}
+          toggleMenu={this.toggleBeerTypeMenu}
+          menuActive={this.state.beerTypeMenuActive}
+        />
+
         <AddBeer handleNewBeer={this.handleNewBeer} />
         <Sort sortByRank={this.sortByRank} />
         {beerSubmissionForm}

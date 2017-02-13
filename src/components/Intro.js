@@ -4,7 +4,7 @@ import '../App.css';
 export default class Header extends Component {
   render() {
     return (
-      <p className="App-intro">
+      <p className="appIntro">
         <strong>Choose your beer wisely</strong>
       </p>
     )
