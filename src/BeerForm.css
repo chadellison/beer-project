@@ -43,13 +43,13 @@
   border-radius: 0px;
   border: none;
   width: 80%;
-  background-color: #bc0505;
+  background-color: #ed4b1e;
   color: white;
   font-size: 15px;
 }
 
 .cancel:hover {
-  background-color: #ff0000;
+  background-color: #ff6e26;
 }
 
 .submitBeerMenu input {

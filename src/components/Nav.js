@@ -5,6 +5,7 @@ import BeerForm from "./BeerForm.js"
 import AddBeer from "./AddBeer.js"
 import Sort from "./Sort.js"
 import Search from "./Search.js"
+import NewBeerNotification from "./NewBeerNotification.js"
 
 export default class Nav extends Component {
   constructor(props) {
@@ -93,10 +94,9 @@ export default class Nav extends Component {
     }
 
     if(this.state.submissionNotification) {
-      notification = <div className="notification">
-                       <h3>"Your submission is pending approval. Cheers!"</h3>
-                       <button onClick={this.closeNotification}>OK, Got it!</button>
-                     </div>
+      notification = <NewBeerNotification
+                       closeNotification={this.closeNotification}
+                     />
     }
 
     return (
