@@ -100,7 +100,7 @@ export default class Nav extends Component {
     }
 
     return (
-      <ul className="nav-bar">
+      <ul className="navBar">
         <Dropdown
           fetchBeers={this.props.fetchBeers}
           beerTypes={this.props.beerTypes}
