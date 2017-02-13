@@ -17,10 +17,16 @@ export default class Nav extends Component {
     this.searchBeers = this.searchBeers.bind(this)
     this.sortByRank = this.sortByRank.bind(this)
     this.toggleBeerTypeMenu = this.toggleBeerTypeMenu.bind(this)
+    this.handleName = this.handleName.bind(this)
+    this.handleType = this.handleType.bind(this)
+    this.handleRating = this.handleRating.bind(this)
     this.state = {
       newBeerMenuActive: false,
       beerTypeMenuActive: false,
-      submissionNotification: false
+      submissionNotification: false,
+      beerFormName: "",
+      beerFromType: "",
+      beerFormRating: ""
     }
   }
 
@@ -39,6 +45,21 @@ export default class Nav extends Component {
   }
 
   submitNewBeer() {
+    fetch("http://localhost:3001/api/v1/beers", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        beer: {
+          name: this.state.beerFormName,
+          beer_type: this.state.beerFormType,
+          rating: this.state.beerFormRating
+        }
+      })
+    })
+
     this.setState({
       newBeerMenuActive: false,
       submissionNotification: true
@@ -83,6 +104,27 @@ export default class Nav extends Component {
     this.props.fetchBeers({text: queryText})
   }
 
+  handleName(e) {
+    let name = e.currentTarget.value
+    this.setState({
+      beerFormName: name
+    })
+  }
+
+  handleType(e) {
+    let type = e.currentTarget.value
+    this.setState({
+      beerFormType: type
+    })
+  }
+
+  handleRating(e) {
+    let rating = e.currentTarget.value
+    this.setState({
+      beerFormRating: rating
+    })
+  }
+
   render() {
     let beerSubmissionForm = ""
     let notification = ""
@@ -90,6 +132,9 @@ export default class Nav extends Component {
       beerSubmissionForm = <BeerForm
                              submitNewBeer={this.submitNewBeer}
                              handleCancel={this.handleCancel}
+                             handleName={this.handleName}
+                             handleType={this.handleType}
+                             handleRating={this.handleRating}
                            />
     }
 
