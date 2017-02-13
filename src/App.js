@@ -96,7 +96,10 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Nav fetchBeers={this.fetchBeers} beerTypes={this.state.beerTypes} />
+        <Nav fetchBeers={this.fetchBeers}
+             beerTypes={this.state.beerTypes}
+             sort={this.state.sort}
+        />
         <Intro />
         <Beers beers={this.state.beers} />
         <Footer />
