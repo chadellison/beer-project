@@ -53,7 +53,17 @@ export default class Nav extends Component {
   }
 
   sortByRank() {
-    this.props.fetchBeers({sort: true})
+    if(this.props.sort === false) {
+      this.props.fetchBeers({sort: true})
+    }
+
+    if(this.props.sort === true) {
+      this.props.fetchBeers({sort: "ascending"})
+    }
+
+    if(this.props.sort === "ascending") {
+      this.props.fetchBeers({sort: false})
+    }
   }
 
   searchBeers(e) {
