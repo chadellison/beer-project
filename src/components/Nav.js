@@ -6,6 +6,12 @@ import AddBeer from "./AddBeer.js"
 import Sort from "./Sort.js"
 import Search from "./Search.js"
 import NewBeerNotification from "./NewBeerNotification.js"
+import Login from "./Login.js"
+import Logout from "./Logout.js"
+import SignUp from "./SignUp.js"
+import MyBeers from "./MyBeers.js"
+import Contact from "./Contact.js"
+import About from "./About.js"
 
 export default class Nav extends Component {
   constructor(props) {
@@ -20,10 +26,14 @@ export default class Nav extends Component {
     this.handleName = this.handleName.bind(this)
     this.handleType = this.handleType.bind(this)
     this.handleRating = this.handleRating.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+    this.handleSignUp = this.handleSignUp.bind(this)
     this.state = {
       newBeerMenuActive: false,
       beerTypeMenuActive: false,
       submissionNotification: false,
+      loggedIn: false,
       beerFormName: "",
       beerFromType: "",
       beerFormRating: ""
@@ -125,9 +135,25 @@ export default class Nav extends Component {
     })
   }
 
+  handleLogin() {
+    alert("login")
+  }
+
+  handleLogout() {
+    alert("logout")
+  }
+
+  handleSignUp() {
+    alert("signup")
+  }
+
   render() {
     let beerSubmissionForm = ""
     let notification = ""
+    let addBeer = ""
+    let logInfo = ""
+    let signUp = ""
+    let myBeers = ""
     if(this.state.newBeerMenuActive) {
       beerSubmissionForm = <BeerForm
                              submitNewBeer={this.submitNewBeer}
@@ -144,6 +170,15 @@ export default class Nav extends Component {
                      />
     }
 
+    if(this.state.loggedIn) {
+      addBeer = <AddBeer handleNewBeer={this.handleNewBeer} />
+      logInfo = <Logout handleLogout={this.handleLogout} />
+      myBeers = <MyBeers />
+    } else {
+      logInfo = <Login handleLogin={this.handleLogin}/>
+      signUp = <SignUp handleSignUp={this.handleSignUp} />
+    }
+
     return (
       <ul className="navBar">
         <Dropdown
@@ -153,11 +188,16 @@ export default class Nav extends Component {
           menuActive={this.state.beerTypeMenuActive}
         />
 
-        <AddBeer handleNewBeer={this.handleNewBeer} />
+        {addBeer}
         <Sort sortByRank={this.sortByRank} />
         {beerSubmissionForm}
+        {myBeers}
         <Search searchBeers={this.searchBeers} />
         {notification}
+        <Contact />
+        <About />
+        {logInfo}
+        {signUp}
       </ul>
     )
   }
