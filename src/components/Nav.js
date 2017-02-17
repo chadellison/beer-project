@@ -36,7 +36,8 @@ export default class Nav extends Component {
       loggedIn: false,
       beerFormName: "",
       beerFromType: "",
-      beerFormRating: ""
+      beerFormRating: "",
+      token: ""
     }
   }
 
@@ -136,7 +137,29 @@ export default class Nav extends Component {
   }
 
   handleLogin() {
-    alert("login")
+    fetch("http://localhost:3001/api/v1/authentication", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        credentials: {
+          email: "jones@gmail.com",
+          password: "password"
+        }
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        token: responseJson.password_digest,
+        loggedIn: true
+      })
+    })
+    .catch((error) => {
+      alert(error);
+    })
   }
 
   handleLogout() {
