@@ -150,7 +150,13 @@ export default class Nav extends Component {
         }
       })
     })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json
+      } else {
+        throw "Invalid Credentials"
+      }
+    })
     .then((responseJson) => {
       this.setState({
         token: responseJson.password_digest,
