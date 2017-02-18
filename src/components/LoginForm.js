@@ -10,9 +10,9 @@ export default class LoginForm extends Component {
     return(
       <div className="loginForm">
         <h4 className="label">Email</h4>
-        <input onChange={this.props.handleEmail}></input>
+        <input className="loginEmail" onChange={this.props.handleEmail}></input>
         <h4 className="label">Password</h4>
-        <input onChange={this.props.handlePassword}></input>
+        <input className="loginPassword" type="password" onChange={this.props.handlePassword}></input>
         <button className="submit" onClick={this.props.handleLogin}>Login</button>
         <button className="cancel" onClick={this.props.handleLoginCancel}>Cancel</button>
         <button className="cancel">Sign Up</button>
