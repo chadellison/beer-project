@@ -17,7 +17,7 @@ export default class BeerForm extends Component {
         <h5 className="label">rating</h5>
         <input className="beerRating" onChange={this.props.handleRating}></input>
         <button className="submit" onClick={this.props.submitNewBeer}>Submit</button>
-        <button className="cancel" onClick={this.props.handleCancel}>Cancel</button>
+        <button className="cancelBeerMenu" onClick={this.props.handleCancel}>Cancel</button>
       </div>
     )
   }

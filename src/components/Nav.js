@@ -28,7 +28,6 @@ export default class Nav extends Component {
     this.handleInput           = this.handleInput.bind(this)
     this.handleLogout          = this.handleLogout.bind(this)
     this.handleSignUp          = this.handleSignUp.bind(this)
-    this.handleLoginCancel     = this.handleLoginCancel.bind(this)
     this.handleLogin           = this.handleLogin.bind(this)
     this.handleLoginFormActive = this.handleLoginFormActive.bind(this)
     this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
@@ -126,7 +125,7 @@ export default class Nav extends Component {
       if (response.status === 200) {
         return response.json
       } else {
-        throw "something went wrong"
+        throw "We were unable to process your request"
       }
     })
     .then((responseJson) => {
@@ -147,16 +146,23 @@ export default class Nav extends Component {
     });
   }
 
-  handleCancel() {
+  handleLoginFormActive() {
     this.setState({
-      newBeerMenuActive: false
+      loginFormActive: !this.state.loginFormActive
     })
   }
 
-  handleLoginCancel() {
+  handleCancel(e) {
+    let field = e.currentTarget.className
+    if(field === "cancelBeerMenu")
     this.setState({
-      loginFormActive: false
+      newBeerMenuActive: false
     })
+    if(field === "cancelLoginMenu") {
+      this.setState({
+        loginFormActive: false
+      })
+    }
   }
 
   closeNotification() {
@@ -232,12 +238,6 @@ export default class Nav extends Component {
     alert("signup")
   }
 
-  handleLoginFormActive() {
-    this.setState({
-      loginFormActive: !this.state.loginFormActive
-    })
-  }
-
   render() {
     let beerSubmissionForm = ""
     let notification = ""
@@ -260,7 +260,7 @@ export default class Nav extends Component {
         handleEmail={this.handleInput}
         handlePassword={this.handleInput}
         handleLogin={this.handleLogin}
-        handleLoginCancel={this.handleLoginCancel}
+        handleLoginCancel={this.handleCancel}
       />
       loginStatus = ""
       signUp = ""
