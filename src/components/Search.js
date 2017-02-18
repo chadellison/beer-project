@@ -8,7 +8,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <input placeholder="search beers" onChange={this.props.searchBeers}></input>
+      <input className="search" placeholder="search beers" onChange={this.props.searchBeers}></input>
     )
   }
 }

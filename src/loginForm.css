@@ -1,0 +1,16 @@
+.loginForm {
+  width: 280px;
+  margin: 5% auto;
+  text-align: center;
+  display: block;
+  border: 1px solid gray;
+}
+
+.loginForm input {
+  margin: auto;
+  width: 75%;
+  padding: 5px;
+  font-size: 15px;
+  border: 1px solid #6d6d6d;
+  outline: none;
+}
