@@ -18,23 +18,21 @@ import LoginForm from "./LoginForm.js"
 export default class Nav extends Component {
   constructor(props) {
     super(props)
-    this.handleNewBeer = this.handleNewBeer.bind(this)
-    this.submitNewBeer = this.submitNewBeer.bind(this)
-    this.handleCancel = this.handleCancel.bind(this)
-    this.closeNotification = this.closeNotification.bind(this)
-    this.searchBeers = this.searchBeers.bind(this)
-    this.sortByRank = this.sortByRank.bind(this)
-    this.toggleBeerTypeMenu = this.toggleBeerTypeMenu.bind(this)
-    this.handleName = this.handleName.bind(this)
-    this.handleType = this.handleType.bind(this)
-    this.handleRating = this.handleRating.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
-    this.handleSignUp = this.handleSignUp.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
-    this.handlePassword = this.handlePassword.bind(this)
-    this.handleLoginCancel = this.handleLoginCancel.bind(this)
-    this.handleLogin = this.handleLogin.bind(this)
+    this.handleNewBeer         = this.handleNewBeer.bind(this)
+    this.submitNewBeer         = this.submitNewBeer.bind(this)
+    this.handleCancel          = this.handleCancel.bind(this)
+    this.closeNotification     = this.closeNotification.bind(this)
+    this.searchBeers           = this.searchBeers.bind(this)
+    this.sortByRank            = this.sortByRank.bind(this)
+    this.toggleBeerTypeMenu    = this.toggleBeerTypeMenu.bind(this)
+    this.handleInput           = this.handleInput.bind(this)
+    this.handleLogout          = this.handleLogout.bind(this)
+    this.handleSignUp          = this.handleSignUp.bind(this)
+    this.handleLoginCancel     = this.handleLoginCancel.bind(this)
+    this.handleLogin           = this.handleLogin.bind(this)
     this.handleLoginFormActive = this.handleLoginFormActive.bind(this)
+    this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
+    this.sendBeerData          = this.sendBeerData.bind(this)
     this.state = {
       newBeerMenuActive: false,
       beerTypeMenuActive: false,
@@ -64,25 +62,81 @@ export default class Nav extends Component {
     })
   }
 
-  submitNewBeer() {
-    fetch("http://localhost:3001/api/v1/beers", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        beer: {
-          name: this.state.beerFormName,
-          beer_type: this.state.beerFormType,
-          rating: this.state.beerFormRating
-        }
+  sendBeerData() {
+    return(
+      fetch("http://localhost:3001/api/v1/beers", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          beer: {
+            name: this.state.beerFormName,
+            beer_type: this.state.beerFormType,
+            rating: this.state.beerFormRating
+          }
+        })
+      })
+    )
+  }
+
+  sendLoginCredentials() {
+    return(
+      fetch("http://localhost:3001/api/v1/authentication", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          credentials: {
+            email: this.state.email,
+            password: this.state.password
+          }
+        })
+      })
+    )
+  }
+
+  handleLogin() {
+    this.sendLoginCredentials()
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json
+      } else {
+        throw "Invalid Credentials"
+      }
+    })
+    .then((responseJson) => {
+      this.setState({
+        token: responseJson.password_digest,
+        loggedIn: true,
+        loginFormActive: false
       })
     })
+    .catch((error) => {
+      alert(error);
+    })
+  }
 
-    this.setState({
-      newBeerMenuActive: false,
-      submissionNotification: true
+  submitNewBeer() {
+    this.sendBeerData()
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json
+      } else {
+        throw "something went wrong"
+      }
+    })
+    .then((responseJson) => {
+      this.setState({
+        newBeerMenuActive: false,
+        submissionNotification: true
+      })
+    })
+    .catch((error) => {
+      alert(error);
     })
   }
 
@@ -130,76 +184,48 @@ export default class Nav extends Component {
     this.props.fetchBeers({text: queryText})
   }
 
-  handleEmail(e) {
-    let email = e.currentTarget.value
-    this.setState({
-      email: email
-    })
-  }
+  handleInput(e) {
+    let value = e.currentTarget.value
+    let field = e.currentTarget.className
 
-  handlePassword(e) {
-    let password = e.currentTarget.value
-    this.setState({
-      password: password
-    })
-  }
-
-  handleName(e) {
-    let name = e.currentTarget.value
-    this.setState({
-      beerFormName: name
-    })
-  }
-
-  handleType(e) {
-    let type = e.currentTarget.value
-    this.setState({
-      beerFormType: type
-    })
-  }
-
-  handleRating(e) {
-    let rating = e.currentTarget.value
-    this.setState({
-      beerFormRating: rating
-    })
-  }
-
-  handleLogin() {
-    fetch("http://localhost:3001/api/v1/authentication", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        credentials: {
-          email: "jones@gmail.com",
-          password: "password"
-        }
-      })
-    })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json
-      } else {
-        throw "Invalid Credentials"
-      }
-    })
-    .then((responseJson) => {
+    if(field === "beerName") {
       this.setState({
-        token: responseJson.password_digest,
-        loggedIn: true,
-        loginFormActive: false
+        beerFormName: value
       })
-    })
-    .catch((error) => {
-      alert(error);
-    })
+    }
+
+    if(field === "beerType") {
+      this.setState({
+        beerFormType: value
+      })
+    }
+
+    if(field === "beerRating") {
+      this.setState({
+        beerFormRating: value
+      })
+    }
+
+    if(field === "loginEmail") {
+      this.setState({
+        email: value
+      })
+    }
+
+    if(field === "loginPassword") {
+      this.setState({
+        password: value
+      })
+    }
   }
 
   handleLogout() {
-    alert("logout")
+    this.setState({
+      loggedIn: false,
+      email: "",
+      password: "",
+      token: ""
+    })
   }
 
   handleSignUp() {
@@ -218,44 +244,42 @@ export default class Nav extends Component {
     let addBeer = ""
     let signUp = ""
     let myBeers = ""
-    let login = <a href="#" onClick={this.handleLoginFormActive}>login</a>
+    let loginStatus = <a href="#" onClick={this.handleLoginFormActive}>login</a>
     let logInfo = ""
+
+    if(this.state.loggedIn) {
+      addBeer = <AddBeer handleNewBeer={this.handleNewBeer} />
+      loginStatus = <Logout handleLogout={this.handleLogout} />
+      myBeers = <MyBeers />
+    } else {
+      signUp = <SignUp handleSignUp={this.handleSignUp} />
+    }
 
     if(this.state.loginFormActive){
       logInfo = <LoginForm
-                  handleEmail={this.handleEmail}
-                  handlePassword={this.handlePassword}
-                  handleLogin={this.handleLogin}
-                  handleLoginCancel={this.handleLoginCancel}
-                />
-      login = ""
+        handleEmail={this.handleInput}
+        handlePassword={this.handleInput}
+        handleLogin={this.handleLogin}
+        handleLoginCancel={this.handleLoginCancel}
+      />
+      loginStatus = ""
+      signUp = ""
     }
 
     if(this.state.newBeerMenuActive) {
       beerSubmissionForm = <BeerForm
-                             submitNewBeer={this.submitNewBeer}
-                             handleCancel={this.handleCancel}
-                             handleName={this.handleName}
-                             handleType={this.handleType}
-                             handleRating={this.handleRating}
-                           />
+        submitNewBeer={this.submitNewBeer}
+        handleCancel={this.handleCancel}
+        handleName={this.handleInput}
+        handleType={this.handleInput}
+        handleRating={this.handleInput}
+      />
     }
 
     if(this.state.submissionNotification) {
       notification = <NewBeerNotification
-                       closeNotification={this.closeNotification}
-                     />
-    }
-
-    if(this.state.loggedIn) {
-      addBeer = <AddBeer handleNewBeer={this.handleNewBeer} />
-      login = <Logout handleLogout={this.handleLogout} />
-      myBeers = <MyBeers />
-    } else {
-      signUp = <SignUp handleSignUp={this.handleSignUp} />
-      if (this.state.loginFormActive) {
-        signUp = ""
-      }
+        closeNotification={this.closeNotification}
+      />
     }
 
     return (
@@ -276,7 +300,7 @@ export default class Nav extends Component {
           {notification}
           <Contact />
           <About />
-          {login}
+          {loginStatus}
           {signUp}
         </ul>
         {logInfo}
