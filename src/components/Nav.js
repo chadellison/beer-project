@@ -35,6 +35,7 @@ export default class Nav extends Component {
     this.handleLoginForm       = this.handleLoginForm.bind(this)
     this.handleSignUpForm      = this.handleSignUpForm.bind(this)
     this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
+    this.sendSignUpCredentials = this.sendSignUpCredentials.bind(this)
     this.sendBeerData          = this.sendBeerData.bind(this)
     this.state = {
       newBeerMenuActive: false,
@@ -101,6 +102,45 @@ export default class Nav extends Component {
         })
       })
     )
+  }
+
+  sendSignUpCredentials() {
+    return(
+      fetch("http://localhost:3001/api/v1/users", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: {
+            email: this.state.email,
+            password: this.state.password
+          }
+        })
+      })
+    )
+  }
+
+  handleSignUp() {
+    this.sendSignUpCredentials()
+    .then((response) => {
+      if (response.status === 201) {
+        return response.json()
+      } else {
+        throw "Invalid Entry"
+      }
+    })
+    .then((responseJson) => {
+      this.setState({
+        token: responseJson.password_digest,
+        loggedIn: true,
+        signUpFormActive: false
+      })
+    })
+    .catch((error) => {
+      alert(error);
+    })
   }
 
   handleLogin() {
@@ -253,11 +293,6 @@ export default class Nav extends Component {
     })
   }
 
-  handleSignUp() {
-    alert("signup")
-    // send api request
-  }
-
   render() {
     let beerSubmissionForm = ""
     let notification = ""
@@ -289,6 +324,8 @@ export default class Nav extends Component {
 
     if(this.state.signUpFormActive) {
       signUpForm = <SignUpForm
+        handleEmail={this.handleInput}
+        handlePassword={this.handleInput}
         handleSignUp={this.handleSignUp}
         handleCancel={this.handleCancel}
       />
