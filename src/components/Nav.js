@@ -15,6 +15,7 @@ import About from "./About.js"
 import LoginForm from "./LoginForm.js"
 import SignUpForm from "./SignUpForm.js"
 import SignUpStatus from "./SignUpStatus.js"
+import LoginStatus from "./LoginStatus.js"
 
 export default class Nav extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ export default class Nav extends Component {
     this.handleLogout          = this.handleLogout.bind(this)
     this.handleSignUp          = this.handleSignUp.bind(this)
     this.handleLogin           = this.handleLogin.bind(this)
-    this.handleLoginFormActive = this.handleLoginFormActive.bind(this)
+    this.handleLoginForm       = this.handleLoginForm.bind(this)
     this.handleSignUpForm      = this.handleSignUpForm.bind(this)
     this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
     this.sendBeerData          = this.sendBeerData.bind(this)
@@ -149,7 +150,7 @@ export default class Nav extends Component {
     });
   }
 
-  handleLoginFormActive() {
+  handleLoginForm() {
     this.setState({
       loginFormActive: !this.state.loginFormActive
     })
@@ -263,7 +264,7 @@ export default class Nav extends Component {
     let signUpStatus = <SignUpStatus handleSignUpForm={this.handleSignUpForm} />
     let signUpForm = ""
     let myBeers = ""
-    let loginStatus = <a href="#" onClick={this.handleLoginFormActive}>login</a>
+    let loginStatus = <LoginStatus handleLoginForm={this.handleLoginForm} />
     let loginForm = ""
 
     if(this.state.loggedIn) {

@@ -15,7 +15,7 @@ export default class LoginForm extends Component {
         <input className="credentialPassword" type="password" onChange={this.props.handlePassword}></input>
         <button className="submit" onClick={this.props.handleLogin}>Login</button>
         <button className="cancelLoginMenu" onClick={this.props.handleLoginCancel}>Cancel</button>
-        <button className="submit" onClick={this.props.handleSignUpForm}>Sign Up</button>
+        <button className="signUp" onClick={this.props.handleSignUpForm}>Sign Up</button>
       </div>
     )
   }

@@ -33,10 +33,12 @@
   color: white;
   font-size: 15px;
   outline: none;
+  transition: all ease 0.3s;
 }
 
 .submit:hover {
   background-color: #ff9d00;
+  transition: all ease 0.3s;
 }
 
 .cancelLoginMenu, .cancelBeerMenu, .cancelSignUpMenu {
@@ -48,10 +50,12 @@
   background-color: #ed4b1e;
   color: white;
   font-size: 15px;
+  transition: all ease 0.3s;
 }
 
 .cancelLoginMenu:hover, .cancelBeerMenu:hover, .cancelSignUpMenu:hover {
   background-color: #ff6e26;
+  transition: all ease 0.3s;
 }
 
 .cancelLoginMenu:active, .cancelBeerMenu:active, .cancelSignUpMenu:active {
