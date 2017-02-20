@@ -78,7 +78,7 @@ class App extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({
-        beers: responseJson.beer
+        beers: responseJson.beers
       })
     })
     .catch((error) => {
