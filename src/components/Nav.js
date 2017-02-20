@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../App.css'
 import "../search.css"
 import "../loginForm.css"
+import "../signUpForm.css"
 import Dropdown from './Dropdown.js'
 import BeerForm from "./BeerForm.js"
 import AddBeer from "./AddBeer.js"
