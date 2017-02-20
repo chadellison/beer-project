@@ -22,9 +22,9 @@ export default class Dropdown extends Component {
     if(this.props.menuActive) {
       let self = this
       menu = <BeerTypes
-               beerTypes={this.props.beerTypes}
-               handleSelectedBeerType={this.handleSelectedBeerType}
-             />
+        beerTypes={this.props.beerTypes}
+        handleSelectedBeerType={this.handleSelectedBeerType}
+      />
     }
 
     return (

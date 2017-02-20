@@ -1,14 +1,14 @@
 import React, { Component } from "react"
 import "../App.css"
 
-export default class SignUp extends Component {
+export default class SignUpForm extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <a href="#" onClick={this.props.handleSignUp}>sign up</a>
+      <a href="#" onClick={this.props.handleSignUpForm}>sign up</a>
     )
   }
 }

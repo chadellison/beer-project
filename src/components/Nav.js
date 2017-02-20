@@ -9,11 +9,12 @@ import Sort from "./Sort.js"
 import Search from "./Search.js"
 import NewBeerNotification from "./NewBeerNotification.js"
 import Logout from "./Logout.js"
-import SignUp from "./SignUp.js"
 import MyBeers from "./MyBeers.js"
 import Contact from "./Contact.js"
 import About from "./About.js"
 import LoginForm from "./LoginForm.js"
+import SignUpForm from "./SignUpForm.js"
+import SignUpStatus from "./SignUpStatus.js"
 
 export default class Nav extends Component {
   constructor(props) {
@@ -30,11 +31,13 @@ export default class Nav extends Component {
     this.handleSignUp          = this.handleSignUp.bind(this)
     this.handleLogin           = this.handleLogin.bind(this)
     this.handleLoginFormActive = this.handleLoginFormActive.bind(this)
+    this.handleSignUpForm      = this.handleSignUpForm.bind(this)
     this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
     this.sendBeerData          = this.sendBeerData.bind(this)
     this.state = {
       newBeerMenuActive: false,
       beerTypeMenuActive: false,
+      signUpFormActive: false,
       submissionNotification: false,
       loggedIn: false,
       loginFormActive: false,
@@ -152,15 +155,29 @@ export default class Nav extends Component {
     })
   }
 
+  handleSignUpForm() {
+    this.setState({
+      signUpFormActive: !this.state.signUpFormActive,
+      loginFormActive: false
+    })
+  }
+
   handleCancel(e) {
     let field = e.currentTarget.className
     if(field === "cancelBeerMenu")
     this.setState({
       newBeerMenuActive: false
     })
+
     if(field === "cancelLoginMenu") {
       this.setState({
         loginFormActive: false
+      })
+    }
+
+    if(field === "cancelSignUpMenu") {
+      this.setState({
+        signUpFormActive: false
       })
     }
   }
@@ -212,13 +229,13 @@ export default class Nav extends Component {
       })
     }
 
-    if(field === "loginEmail") {
+    if(field === "credentialEmail") {
       this.setState({
         email: value
       })
     }
 
-    if(field === "loginPassword") {
+    if(field === "credentialPassword") {
       this.setState({
         password: value
       })
@@ -236,34 +253,45 @@ export default class Nav extends Component {
 
   handleSignUp() {
     alert("signup")
+    // send api request
   }
 
   render() {
     let beerSubmissionForm = ""
     let notification = ""
     let addBeer = ""
-    let signUp = ""
+    let signUpStatus = <SignUpStatus handleSignUpForm={this.handleSignUpForm} />
+    let signUpForm = ""
     let myBeers = ""
     let loginStatus = <a href="#" onClick={this.handleLoginFormActive}>login</a>
-    let logInfo = ""
+    let loginForm = ""
 
     if(this.state.loggedIn) {
       addBeer = <AddBeer handleNewBeer={this.handleNewBeer} />
       loginStatus = <Logout handleLogout={this.handleLogout} />
       myBeers = <MyBeers />
-    } else {
-      signUp = <SignUp handleSignUp={this.handleSignUp} />
+      signUpStatus = ""
     }
 
-    if(this.state.loginFormActive){
-      logInfo = <LoginForm
+    if(this.state.loginFormActive) {
+      loginForm = <LoginForm
         handleEmail={this.handleInput}
         handlePassword={this.handleInput}
         handleLogin={this.handleLogin}
+        handleSignUpForm={this.handleSignUpForm}
         handleLoginCancel={this.handleCancel}
       />
       loginStatus = ""
-      signUp = ""
+      signUpStatus = ""
+    }
+
+    if(this.state.signUpFormActive) {
+      signUpForm = <SignUpForm
+        handleSignUp={this.handleSignUp}
+        handleCancel={this.handleCancel}
+      />
+      loginStatus = ""
+      signUpStatus = ""
     }
 
     if(this.state.newBeerMenuActive) {
@@ -301,9 +329,10 @@ export default class Nav extends Component {
           <Contact />
           <About />
           {loginStatus}
-          {signUp}
+          {signUpStatus}
         </ul>
-        {logInfo}
+        {loginForm}
+        {signUpForm}
       </div>
     )
   }

@@ -1,4 +1,5 @@
-.loginForm {
+.credentialForm {
+  padding-top: 10px;
   width: 280px;
   margin: 5% auto;
   text-align: center;
@@ -6,7 +7,7 @@
   border: 1px solid gray;
 }
 
-.loginForm input {
+.credentialForm input {
   margin: auto;
   width: 75%;
   padding: 5px;
