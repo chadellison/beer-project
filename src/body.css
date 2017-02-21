@@ -4,6 +4,12 @@
   z-index: -1;
 }
 
+@media only screen and (min-width: 701px) {
+  .credentialForm {
+    margin: 5% auto;
+  }
+}
+
 @media only screen and (max-width: 700px) {
   .beerProfile {
     height: 300px;
@@ -14,8 +20,8 @@
     margin-top: 15px;
   }
 
-  .loginForm {
-    padding-top: 80px;
+  .credentialForm {
+    margin: 120px auto;
   }
 
   .title {
