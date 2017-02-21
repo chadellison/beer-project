@@ -3,13 +3,13 @@ import '../App.css'
 import "../search.css"
 import "../loginForm.css"
 import "../signUpForm.css"
+import "../notification.css"
 import Dropdown from './Dropdown.js'
 import BeerForm from "./BeerForm.js"
 import AddBeer from "./AddBeer.js"
 import Sort from "./Sort.js"
 import Search from "./Search.js"
-import NewBeerNotification from "./NewBeerNotification.js"
-import SignUpNotification from "./SignUpNotification.js"
+import CustomNotification from "./CustomNotification.js"
 import Logout from "./Logout.js"
 import MyBeers from "./MyBeers.js"
 import Contact from "./Contact.js"
@@ -365,14 +365,16 @@ export default class Nav extends Component {
     }
 
     if(this.state.submissionNotification) {
-      beerSubmissionNotification = <NewBeerNotification
+      beerSubmissionNotification = <CustomNotification
         closeNotification={this.closeNotification}
+        notificationText="Your submission is pending approval. Cheers!"
       />
     }
 
     if(this.state.signUpNotification) {
-      signUpNotification = <SignUpNotification
+      signUpNotification = <CustomNotification
         closeNotification={this.closeNotification}
+        notificationText="An email to confirm your account has been sent"
       />
     }
 
@@ -391,13 +393,14 @@ export default class Nav extends Component {
           {beerSubmissionForm}
           {myBeers}
           <Search searchBeers={this.searchBeers} />
-          {beerSubmissionNotification}
-          {signUpNotification}
+
           <Contact />
           <About />
           {loginStatus}
           {signUpStatus}
         </ul>
+        {beerSubmissionNotification}
+        {signUpNotification}
         {loginForm}
         {signUpForm}
       </div>

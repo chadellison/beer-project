@@ -1,0 +1,23 @@
+.notification {
+  margin: 5%;
+  text-align: center;
+}
+
+.notificationButton {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 30px;
+  border-radius: 0px;
+  border: none;
+  width: 20%;
+  background-color: #ed4b1e;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: all ease 0.3s;
+}
+
+.notificationButton:hover {
+  background-color: #ff9d00;
+  transition: all ease 0.3s;
+}
