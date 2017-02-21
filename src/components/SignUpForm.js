@@ -9,6 +9,10 @@ export default class SignUpForm extends Component {
   render() {
     return (
       <div className="credentialForm">
+        <h4 className="label">First Name</h4>
+        <input className="credentialFirstName" onChange={this.props.handleFirstName}></input>
+        <h4 className="label">Last Name</h4>
+        <input className="credentialLastName" onChange={this.props.handleLastName}></input>
         <h4 className="label">Email</h4>
         <input className="credentialEmail" onChange={this.props.handleEmail}></input>
         <h4 className="label">Password</h4>

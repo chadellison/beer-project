@@ -48,6 +48,8 @@ export default class Nav extends Component {
       beerFromType: "",
       beerFormRating: "",
       token: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: ""
     }
@@ -114,6 +116,8 @@ export default class Nav extends Component {
         },
         body: JSON.stringify({
           user: {
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
             email: this.state.email,
             password: this.state.password
           }
@@ -271,6 +275,18 @@ export default class Nav extends Component {
       })
     }
 
+    if(field === "credentialFirstName") {
+      this.setState({
+        firstName: value
+      })
+    }
+
+    if(field === "credentialLastName") {
+      this.setState({
+        lastName: value
+      })
+    }
+
     if(field === "credentialEmail") {
       this.setState({
         email: value
@@ -324,6 +340,8 @@ export default class Nav extends Component {
 
     if(this.state.signUpFormActive) {
       signUpForm = <SignUpForm
+        handleFirstName={this.handleInput}
+        handleLastName={this.handleInput}
         handleEmail={this.handleInput}
         handlePassword={this.handleInput}
         handleSignUp={this.handleSignUp}
