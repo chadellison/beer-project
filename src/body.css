@@ -44,6 +44,12 @@
   width: 280px;
 }
 
+.beers {
+  margin-left: 5%;
+  padding-top: 50px;
+  padding-bottom: 200px;
+}
+
 .beerName, .beerType, .beerRating, .beerImage, .rateBeer {
   padding: 3px;
 }
