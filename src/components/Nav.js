@@ -84,7 +84,8 @@ export default class Nav extends Component {
             name: this.state.beerFormName,
             beer_type: this.state.beerFormType,
             rating: this.state.beerFormRating
-          }
+          },
+          token: this.state.token
         })
       })
     )
