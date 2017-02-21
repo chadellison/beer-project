@@ -9,6 +9,7 @@ import AddBeer from "./AddBeer.js"
 import Sort from "./Sort.js"
 import Search from "./Search.js"
 import NewBeerNotification from "./NewBeerNotification.js"
+import SignUpNotification from "./SignUpNotification.js"
 import Logout from "./Logout.js"
 import MyBeers from "./MyBeers.js"
 import Contact from "./Contact.js"
@@ -42,6 +43,7 @@ export default class Nav extends Component {
       beerTypeMenuActive: false,
       signUpFormActive: false,
       submissionNotification: false,
+      signUpNotification: false,
       loggedIn: false,
       loginFormActive: false,
       beerFormName: "",
@@ -137,9 +139,8 @@ export default class Nav extends Component {
     })
     .then((responseJson) => {
       this.setState({
-        token: responseJson.password_digest,
-        loggedIn: true,
-        signUpFormActive: false
+        signUpFormActive: false,
+        signUpNotification: true
       })
     })
     .catch((error) => {
@@ -171,7 +172,7 @@ export default class Nav extends Component {
   submitNewBeer() {
     this.sendBeerData()
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         return response.json
       } else {
         throw "We were unable to process your request"
@@ -230,7 +231,8 @@ export default class Nav extends Component {
 
   closeNotification() {
     this.setState({
-      submissionNotification: false
+      submissionNotification: false,
+      signUpNotification: false
     })
   }
 
@@ -311,7 +313,8 @@ export default class Nav extends Component {
 
   render() {
     let beerSubmissionForm = ""
-    let notification = ""
+    let beerSubmissionNotification = ""
+    let signUpNotification = ""
     let addBeer = ""
     let signUpStatus = <SignUpStatus handleSignUpForm={this.handleSignUpForm} />
     let signUpForm = ""
@@ -362,7 +365,13 @@ export default class Nav extends Component {
     }
 
     if(this.state.submissionNotification) {
-      notification = <NewBeerNotification
+      beerSubmissionNotification = <NewBeerNotification
+        closeNotification={this.closeNotification}
+      />
+    }
+
+    if(this.state.signUpNotification) {
+      signUpNotification = <SignUpNotification
         closeNotification={this.closeNotification}
       />
     }
@@ -382,7 +391,8 @@ export default class Nav extends Component {
           {beerSubmissionForm}
           {myBeers}
           <Search searchBeers={this.searchBeers} />
-          {notification}
+          {beerSubmissionNotification}
+          {signUpNotification}
           <Contact />
           <About />
           {loginStatus}
