@@ -22,7 +22,8 @@ class App extends Component {
       beerTypes: [],
       type: "All Beers",
       text: "",
-      sort: false
+      sort: false,
+      myBeers: ""
     }
   }
 
@@ -63,10 +64,16 @@ class App extends Component {
       params.sort = this.state.sort
     }
 
+    if (params.myBeers === undefined) {
+      params.myBeers = this.state.myBeers
+    }
+
     let searchParams = "type=" +
                         params.type.toLowerCase() +
                         "&" + "text=" + params.text.toLowerCase() +
-                        "&" + "sort=" + params.sort
+                        "&" + "sort=" + params.sort +
+                        "&" + "my_beers=" + params.myBeers +
+                        "&" + "token=" + params.token
 
     fetch("http://localhost:3001/api/v1/beers?" + searchParams, {
       method: "GET",
@@ -88,7 +95,8 @@ class App extends Component {
     this.setState({
       type: params.type,
       text: params.text,
-      sort: params.sort
+      sort: params.sort,
+      myBeers: params.myBeers
     })
   }
 

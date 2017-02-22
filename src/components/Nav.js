@@ -38,6 +38,7 @@ export default class Nav extends Component {
     this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
     this.sendSignUpCredentials = this.sendSignUpCredentials.bind(this)
     this.sendBeerData          = this.sendBeerData.bind(this)
+    this.handleMyBeers         = this.handleMyBeers.bind(this)
     this.state = {
       newBeerMenuActive: false,
       beerTypeMenuActive: false,
@@ -256,6 +257,10 @@ export default class Nav extends Component {
     this.props.fetchBeers({text: queryText})
   }
 
+  handleMyBeers() {
+    this.props.fetchBeers({myBeers: true, token: this.state.token})
+  }
+
   handleInput(e) {
     let value = e.currentTarget.value
     let field = e.currentTarget.className
@@ -326,7 +331,7 @@ export default class Nav extends Component {
     if(this.state.loggedIn) {
       addBeer = <AddBeer handleNewBeer={this.handleNewBeer} />
       loginStatus = <Logout handleLogout={this.handleLogout} />
-      myBeers = <MyBeers />
+      myBeers = <MyBeers handleMyBeers={this.handleMyBeers} />
       signUpStatus = ""
     }
 

@@ -8,7 +8,7 @@ export default class MyBeers extends Component {
 
   render() {
     return (
-      <a href="#">my beers</a>
+      <a href="#" onClick={this.props.handleMyBeers}>my beers</a>
     )
   }
 }
