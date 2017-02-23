@@ -17,6 +17,7 @@ class App extends Component {
     super(props)
     this.fetchBeers = this.fetchBeers.bind(this)
     this.fetchBeerTypes = this.fetchBeerTypes.bind(this)
+    this.handleAddedBeer = this.handleAddedBeer.bind(this)
     this.state = {
       beers: [],
       beerTypes: [],
@@ -29,6 +30,14 @@ class App extends Component {
   componentWillMount() {
     this.fetchBeers()
     this.fetchBeerTypes()
+  }
+
+  handleAddedBeer(beer) {
+    let beers = this.state.beers
+    beers.push(beer)
+    this.setState({
+      beers: beers
+    })
   }
 
   fetchBeerTypes() {
@@ -108,6 +117,7 @@ class App extends Component {
           sort={this.state.sort}
           handleCurrentBeers={this.handleCurrentBeers}
           currentBeers={this.state.currentBeers}
+          handleAddedBeer={this.handleAddedBeer}
         />
         <Intro />
         <Beers beers={this.state.beers} />

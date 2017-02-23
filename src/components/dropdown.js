@@ -13,7 +13,7 @@ export default class Dropdown extends Component {
 
   handleSelectedBeerType(e) {
     let value = e.currentTarget.textContent
-    this.props.fetchBeers({type: value})
+    this.props.fetchBeers({type: value, token: this.props.token})
     this.setState({beerType: value})
   }
 

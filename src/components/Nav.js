@@ -190,12 +190,16 @@ export default class Nav extends Component {
     this.sendBeerData()
     .then((response) => {
       if (response.status === 201) {
-        return response.json
+        return response.json()
       } else {
         throw "We were unable to process your request"
       }
     })
     .then((responseJson) => {
+      if(this.state.currentBeers === "all beers") {
+        this.props.handleAddedBeer(responseJson)
+      }
+
       this.setState({
         newBeerMenuActive: false,
         submissionNotification: true
@@ -255,21 +259,21 @@ export default class Nav extends Component {
 
   sortByRank() {
     if(this.props.sort === false) {
-      this.props.fetchBeers({sort: true})
+      this.props.fetchBeers({sort: true, token: this.state.token})
     }
 
     if(this.props.sort === true) {
-      this.props.fetchBeers({sort: "ascending"})
+      this.props.fetchBeers({sort: "ascending", token: this.state.token})
     }
 
     if(this.props.sort === "ascending") {
-      this.props.fetchBeers({sort: false})
+      this.props.fetchBeers({sort: false, token: this.state.token})
     }
   }
 
   searchBeers(e) {
     let queryText = e.currentTarget.value
-    this.props.fetchBeers({text: queryText})
+    this.props.fetchBeers({text: queryText, token: this.state.token})
   }
 
   handleInput(e) {
@@ -407,6 +411,7 @@ export default class Nav extends Component {
             beerTypes={this.props.beerTypes}
             toggleMenu={this.toggleBeerTypeMenu}
             menuActive={this.state.beerTypeMenuActive}
+            token={this.state.token}
           />
 
           {addBeer}

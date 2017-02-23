@@ -7,9 +7,9 @@ export default class Beers extends Component {
     let self = this
     return (
       <ul className="beers">
-        { this.props.beers.map(function (beer, index) {
+        { this.props.beers.map(function (beer) {
           return (
-            <li key={index}><SingleBeer
+            <li key={beer.id}><SingleBeer
                               image={beer.image}
                               name={beer.name}
                               rating={beer.rating}
