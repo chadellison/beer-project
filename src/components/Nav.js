@@ -414,9 +414,6 @@ export default class Nav extends Component {
           {beerSubmissionForm}
           {currentBeers}
           <Search searchBeers={this.searchBeers} />
-
-          <Contact />
-          <About />
           {loginStatus}
           {signUpStatus}
         </ul>
