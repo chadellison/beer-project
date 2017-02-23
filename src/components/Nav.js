@@ -55,7 +55,7 @@ export default class Nav extends Component {
       lastName: "",
       email: "",
       password: "",
-      currentBeers: "my beers"
+      currentBeers: "all beers"
     }
   }
 
@@ -178,7 +178,8 @@ export default class Nav extends Component {
       this.setState({
         token: responseJson.password_digest,
         loggedIn: true,
-        loginFormActive: false
+        loginFormActive: false,
+        currentBeers: "my beers"
       })
     })
     .catch((error) => {
