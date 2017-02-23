@@ -259,17 +259,22 @@ export default class Nav extends Component {
   }
 
   sortByRank() {
+    let sort = ""
     if(this.props.sort === false) {
-      this.props.fetchBeers({sort: true, token: this.state.token})
+      sort = true
     }
 
     if(this.props.sort === true) {
-      this.props.fetchBeers({sort: "ascending", token: this.state.token})
+      sort = "ascending"
     }
 
     if(this.props.sort === "ascending") {
-      this.props.fetchBeers({sort: false, token: this.state.token})
+      sort = false
     }
+
+    this.props.fetchBeers({sort: sort,
+                           token: this.state.token,
+                           current_beers: this.state.current_beers})
   }
 
   searchBeers(e) {
@@ -325,11 +330,13 @@ export default class Nav extends Component {
   }
 
   handleLogout() {
+    this.props.fetchBeers({currentBeers: "all beers"})
     this.setState({
       loggedIn: false,
       email: "",
       password: "",
-      token: ""
+      token: "",
+      currentBeers: "all beers"
     })
   }
 
