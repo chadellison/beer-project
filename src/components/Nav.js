@@ -61,6 +61,7 @@ export default class Nav extends Component {
 
   handleCurrentBeers() {
     this.props.fetchBeers({currentBeers: this.state.currentBeers, token: this.state.token})
+    this.props.fetchBeerTypes({currentBeers: this.state.currentBeers, token: this.state.token})
 
     if(this.state.currentBeers === "my beers") {
       this.setState({
@@ -331,6 +332,7 @@ export default class Nav extends Component {
 
   handleLogout() {
     this.props.fetchBeers({currentBeers: "all beers"})
+    this.props.fetchBeerTypes({currentBeers: "all beers"})
     this.setState({
       loggedIn: false,
       email: "",

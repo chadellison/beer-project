@@ -40,8 +40,11 @@ class App extends Component {
     })
   }
 
-  fetchBeerTypes() {
-    fetch("http://localhost:3001/api/v1/beer_types", {
+  fetchBeerTypes(params={}) {
+    let searchParams = "current_beers=" + params.currentBeers +
+                       "&" + "token=" + params.token
+
+    fetch("http://localhost:3001/api/v1/beer_types?" + searchParams, {
       method: "GET",
       headers: {
         'Accept': 'application/json',
@@ -77,11 +80,11 @@ class App extends Component {
     }
 
     let searchParams = "type=" +
-                        params.type.toLowerCase() +
-                        "&" + "text=" + params.text.toLowerCase() +
-                        "&" + "sort=" + params.sort +
-                        "&" + "current_beers=" + params.currentBeers +
-                        "&" + "token=" + params.token
+                       params.type.toLowerCase() +
+                       "&" + "text=" + params.text.toLowerCase() +
+                       "&" + "sort=" + params.sort +
+                       "&" + "current_beers=" + params.currentBeers +
+                       "&" + "token=" + params.token
 
     fetch("http://localhost:3001/api/v1/beers?" + searchParams, {
       method: "GET",
@@ -118,6 +121,7 @@ class App extends Component {
           handleCurrentBeers={this.handleCurrentBeers}
           currentBeers={this.state.currentBeers}
           handleAddedBeer={this.handleAddedBeer}
+          fetchBeerTypes={this.fetchBeerTypes}
         />
         <Intro />
         <Beers beers={this.state.beers} />
