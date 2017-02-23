@@ -11,7 +11,7 @@ import Sort from "./Sort.js"
 import Search from "./Search.js"
 import CustomNotification from "./CustomNotification.js"
 import Logout from "./Logout.js"
-import MyBeers from "./MyBeers.js"
+import CurrentBeers from "./CurrentBeers.js"
 import Contact from "./Contact.js"
 import About from "./About.js"
 import LoginForm from "./LoginForm.js"
@@ -38,7 +38,7 @@ export default class Nav extends Component {
     this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
     this.sendSignUpCredentials = this.sendSignUpCredentials.bind(this)
     this.sendBeerData          = this.sendBeerData.bind(this)
-    this.handleMyBeers         = this.handleMyBeers.bind(this)
+    this.handleCurrentBeers    = this.handleCurrentBeers.bind(this)
     this.state = {
       newBeerMenuActive: false,
       beerTypeMenuActive: false,
@@ -54,7 +54,22 @@ export default class Nav extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      password: ""
+      password: "",
+      currentBeers: "my beers"
+    }
+  }
+
+  handleCurrentBeers() {
+    this.props.fetchBeers({currentBeers: this.state.currentBeers, token: this.state.token})
+
+    if(this.state.currentBeers === "my beers") {
+      this.setState({
+        currentBeers: "all beers"
+      })
+    } else {
+      this.setState({
+        currentBeers: "my beers"
+      })
     }
   }
 
@@ -257,10 +272,6 @@ export default class Nav extends Component {
     this.props.fetchBeers({text: queryText})
   }
 
-  handleMyBeers() {
-    this.props.fetchBeers({myBeers: true, token: this.state.token})
-  }
-
   handleInput(e) {
     let value = e.currentTarget.value
     let field = e.currentTarget.className
@@ -324,14 +335,18 @@ export default class Nav extends Component {
     let addBeer = ""
     let signUpStatus = <SignUpStatus handleSignUpForm={this.handleSignUpForm} />
     let signUpForm = ""
-    let myBeers = ""
+    let currentBeers = ""
     let loginStatus = <LoginStatus handleLoginForm={this.handleLoginForm} />
     let loginForm = ""
 
     if(this.state.loggedIn) {
       addBeer = <AddBeer handleNewBeer={this.handleNewBeer} />
       loginStatus = <Logout handleLogout={this.handleLogout} />
-      myBeers = <MyBeers handleMyBeers={this.handleMyBeers} />
+
+      currentBeers = <CurrentBeers
+        handleCurrentBeers={this.handleCurrentBeers}
+        currentBeers={this.state.currentBeers}
+      />
       signUpStatus = ""
     }
 
@@ -397,7 +412,7 @@ export default class Nav extends Component {
           {addBeer}
           <Sort sortByRank={this.sortByRank} />
           {beerSubmissionForm}
-          {myBeers}
+          {currentBeers}
           <Search searchBeers={this.searchBeers} />
 
           <Contact />

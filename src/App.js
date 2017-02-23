@@ -15,15 +15,14 @@ import Footer from './components/Footer.js'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.fetchBeers = this.fetchBeers.bind(this);
-    this.fetchBeerTypes = this.fetchBeerTypes.bind(this);
+    this.fetchBeers = this.fetchBeers.bind(this)
+    this.fetchBeerTypes = this.fetchBeerTypes.bind(this)
     this.state = {
       beers: [],
       beerTypes: [],
-      type: "All Beers",
+      type: "",
       text: "",
-      sort: false,
-      myBeers: ""
+      sort: false
     }
   }
 
@@ -64,15 +63,15 @@ class App extends Component {
       params.sort = this.state.sort
     }
 
-    if (params.myBeers === undefined) {
-      params.myBeers = this.state.myBeers
+    if (params.currentBeers === undefined) {
+      params.currentBeers = this.state.currentBeers
     }
 
     let searchParams = "type=" +
                         params.type.toLowerCase() +
                         "&" + "text=" + params.text.toLowerCase() +
                         "&" + "sort=" + params.sort +
-                        "&" + "my_beers=" + params.myBeers +
+                        "&" + "current_beers=" + params.currentBeers +
                         "&" + "token=" + params.token
 
     fetch("http://localhost:3001/api/v1/beers?" + searchParams, {
@@ -96,7 +95,7 @@ class App extends Component {
       type: params.type,
       text: params.text,
       sort: params.sort,
-      myBeers: params.myBeers
+      currentBeers: params.currentBeers
     })
   }
 
@@ -105,8 +104,10 @@ class App extends Component {
       <div className="App">
         <Header />
         <Nav fetchBeers={this.fetchBeers}
-             beerTypes={this.state.beerTypes}
-             sort={this.state.sort}
+          beerTypes={this.state.beerTypes}
+          sort={this.state.sort}
+          handleCurrentBeers={this.handleCurrentBeers}
+          currentBeers={this.state.currentBeers}
         />
         <Intro />
         <Beers beers={this.state.beers} />

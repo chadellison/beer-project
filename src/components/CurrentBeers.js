@@ -1,14 +1,14 @@
 import React, { Component } from "react"
 import "../App.css"
 
-export default class MyBeers extends Component {
+export default class CurrentBeers extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <a href="#" onClick={this.props.handleMyBeers}>my beers</a>
+      <a href="#" onClick={this.props.handleCurrentBeers}>{this.props.currentBeers}</a>
     )
   }
 }

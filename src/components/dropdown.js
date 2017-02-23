@@ -7,7 +7,7 @@ export default class Dropdown extends Component {
     super(props);
     this.handleSelectedBeerType = this.handleSelectedBeerType.bind(this)
     this.state = {
-      beerType: "all beers"
+      beerType: "all types"
     };
   }
 
