@@ -10,6 +10,9 @@ export default class RateBeerMenu extends Component {
     let rating = e.currentTarget.textContent
     this.props.toggleRateBeer()
     alert("you rated this beer " + rating)
+    // need login state
+    // need token
+    // need currentBeers state
   }
 
   render() {
