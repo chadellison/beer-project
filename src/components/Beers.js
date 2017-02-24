@@ -12,7 +12,7 @@ export default class Beers extends Component {
             <li key={beer.id}><SingleBeer
                               image={beer.image}
                               name={beer.name}
-                              rating={beer.rating}
+                              rating={beer.average_rating}
                               type={beer.beer_type} />
             </li>
           )
