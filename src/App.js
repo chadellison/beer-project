@@ -18,7 +18,7 @@ class App extends Component {
     this.fetchBeers            = this.fetchBeers.bind(this)
     this.fetchBeerTypes        = this.fetchBeerTypes.bind(this)
     this.handleAddedBeer       = this.handleAddedBeer.bind(this)
-    this.handleCredentialInput = this.handleCredentialInput.bind(this)
+    this.handleInput           = this.handleInput.bind(this)
     this.handleLogin           = this.handleLogin.bind(this)
     this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
     this.handleLoginForm       = this.handleLoginForm.bind(this)
@@ -29,6 +29,10 @@ class App extends Component {
     this.closeNotification     = this.closeNotification.bind(this)
     this.handleCurrentBeers    = this.handleCurrentBeers.bind(this)
     this.submitNewBeer         = this.submitNewBeer.bind(this)
+    this.sendBeerData          = this.sendBeerData.bind(this)
+    this.toggleBeerTypeMenu    = this.toggleBeerTypeMenu.bind(this)
+    this.handleNewBeer         = this.handleNewBeer.bind(this)
+    this.sendSignUpCredentials = this.sendSignUpCredentials.bind(this)
     this.state = {
       beers: [],
       beerTypes: [],
@@ -45,13 +49,39 @@ class App extends Component {
       lastName: "",
       email: "",
       password: "",
-      token: ""
+      token: "",
+      beerFormName: "",
+      beerFromType: "",
+      beerFormRating: "",
+      beerTypeMenuActive: false,
+      newBeerMenuActive: false
     }
   }
 
   componentWillMount() {
     this.fetchBeers()
     this.fetchBeerTypes()
+  }
+
+  toggleBeerTypeMenu() {
+    this.setState({
+      beerTypeMenuActive: !this.state.beerTypeMenuActive,
+      newBeerMenuActive: false
+    });
+  }
+
+  handleNewBeer() {
+    let newBeer = ""
+    if(!this.state.newBeerMenuActive) {
+      newBeer = true
+    } else {
+      newBeer = false
+    }
+
+    this.setState({
+      newBeerMenuActive: newBeer,
+      beerTypeMenuActive: false
+    })
   }
 
   handleAddedBeer(beer) {
@@ -69,6 +99,46 @@ class App extends Component {
     })
   }
 
+  sendBeerData() {
+    return(
+      fetch("http://localhost:3001/api/v1/beers", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          beer: {
+            name: this.state.beerFormName,
+            beer_type: this.state.beerFormType,
+            rating: this.state.beerFormRating
+          },
+          token: this.state.token
+        })
+      })
+    )
+  }
+
+  sendSignUpCredentials() {
+    return(
+      fetch("http://localhost:3001/api/v1/users", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: {
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password
+          }
+        })
+      })
+    )
+  }
+
   submitNewBeer() {
     this.sendBeerData()
     .then((response) => {
@@ -79,13 +149,13 @@ class App extends Component {
       }
     })
     .then((responseJson) => {
-      if(this.state.currentBeers === "all beers") {
+      if(this.state.currentBeers === "my beers") {
         this.handleAddedBeer(responseJson)
       }
 
       this.setState({
-        newBeerMenuActive: false,
-        submissionNotification: true
+        submissionNotification: true,
+        newBeerMenuActive: false
       })
     })
     .catch((error) => {
@@ -132,8 +202,7 @@ class App extends Component {
       this.setState({
         token: responseJson.password_digest,
         loggedIn: true,
-        loginFormActive: false,
-        currentBeers: "my beers"
+        loginFormActive: false
       })
     })
     .catch((error) => {
@@ -171,9 +240,27 @@ class App extends Component {
     })
   }
 
-  handleCredentialInput(e) {
+  handleInput(e) {
     let value = e.currentTarget.value
     let field = e.currentTarget.className
+
+    if(field === "beerName") {
+      this.setState({
+        beerFormName: value
+      })
+    }
+
+    if(field === "beerType") {
+      this.setState({
+        beerFormType: value
+      })
+    }
+
+    if(field === "beerRating") {
+      this.setState({
+        beerFormRating: value
+      })
+    }
 
     if(field === "credentialFirstName") {
       this.setState({
@@ -213,6 +300,12 @@ class App extends Component {
         signUpFormActive: false
       })
     }
+
+    if(field === "cancelBeerMenu") {
+      this.setState({
+        newBeerMenuActive: false
+      })
+    }
   }
 
   closeNotification() {
@@ -223,18 +316,20 @@ class App extends Component {
   }
 
   handleCurrentBeers() {
-    this.fetchBeers({currentBeers: this.state.currentBeers, token: this.state.token})
-    this.fetchBeerTypes({currentBeers: this.state.currentBeers, token: this.state.token})
+    let changeCurrentBeers = ""
 
     if(this.state.currentBeers === "my beers") {
-      this.setState({
-        currentBeers: "all beers"
-      })
+      changeCurrentBeers = "all beers"
     } else {
-      this.setState({
-        currentBeers: "my beers"
-      })
+      changeCurrentBeers = "my beers"
     }
+
+    this.fetchBeers({currentBeers: changeCurrentBeers, token: this.state.token})
+    this.fetchBeerTypes({currentBeers: changeCurrentBeers, token: this.state.token})
+
+    this.setState({
+      currentBeers: changeCurrentBeers
+    })
   }
 
   fetchBeerTypes(params={}) {
@@ -318,23 +413,27 @@ class App extends Component {
           token={this.state.token}
           handleCurrentBeers={this.handleCurrentBeers}
           currentBeers={this.state.currentBeers}
-          handleAddedBeer={this.handleAddedBeer}
           fetchBeerTypes={this.fetchBeerTypes}
-          handleCredentialInput={this.handleCredentialInput}
+          handleInput={this.handleInput}
           currentBeers={this.state.currentBeers}
           handleLoginForm={this.handleLoginForm}
           handleLogin={this.handleLogin}
           loginFormActive={this.state.loginFormActive}
-          handleSignUp={this.handleSignUp}
           signUpFormActive={this.state.signUpFormActive}
           handleSignUpForm={this.handleSignUpForm}
+          handleSignUp={this.handleSignUp}
           handleCancel={this.handleCancel}
           signUpNotification={this.state.signUpNotification}
           submissionNotification={this.state.submissionNotification}
           closeNotification={this.closeNotification}
-          submitNewBeer={this.props.submitNewBeer}
+          submitNewBeer={this.submitNewBeer}
           handleLogout={this.handleLogout}
           loggedIn={this.state.loggedIn}
+          toggleBeerTypeMenu={this.toggleBeerTypeMenu}
+          beerTypeMenuActive={this.state.beerTypeMenuActive}
+          handleNewBeer={this.handleNewBeer}
+          newBeerMenuActive={this.state.newBeerMenuActive}
+
         />
         <Intro />
         <Beers beers={this.state.beers} />

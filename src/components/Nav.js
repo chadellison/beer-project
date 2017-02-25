@@ -22,88 +22,8 @@ import LoginStatus from "./LoginStatus.js"
 export default class Nav extends Component {
   constructor(props) {
     super(props)
-    this.handleNewBeer         = this.handleNewBeer.bind(this)
-    this.handleBeerCancel      = this.handleBeerCancel.bind(this)
     this.searchBeers           = this.searchBeers.bind(this)
     this.sortByRank            = this.sortByRank.bind(this)
-    this.toggleBeerTypeMenu    = this.toggleBeerTypeMenu.bind(this)
-    this.handleBeerInput       = this.handleBeerInput.bind(this)
-    this.sendSignUpCredentials = this.sendSignUpCredentials.bind(this)
-    this.sendBeerData          = this.sendBeerData.bind(this)
-    this.state = {
-      newBeerMenuActive: false,
-      beerTypeMenuActive: false,
-      beerFormName: "",
-      beerFromType: "",
-      beerFormRating: "",
-    }
-  }
-
-  handleNewBeer() {
-    let newBeer = ""
-    if(!this.state.newBeerMenuActive) {
-      newBeer = true
-    } else {
-      newBeer = false
-    }
-
-    this.setState({
-      newBeerMenuActive: newBeer,
-      beerTypeMenuActive: false
-    })
-  }
-
-  sendBeerData() {
-    return(
-      fetch("http://localhost:3001/api/v1/beers", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          beer: {
-            name: this.state.beerFormName,
-            beer_type: this.state.beerFormType,
-            rating: this.state.beerFormRating
-          },
-          token: this.props.token
-        })
-      })
-    )
-  }
-
-  sendSignUpCredentials() {
-    return(
-      fetch("http://localhost:3001/api/v1/users", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user: {
-            first_name: this.props.firstName,
-            last_name: this.props.lastName,
-            email: this.props.email,
-            password: this.props.password
-          }
-        })
-      })
-    )
-  }
-
-  toggleBeerTypeMenu() {
-    this.setState({
-      beerTypeMenuActive: !this.state.beerTypeMenuActive,
-      newBeerMenuActive: false
-    });
-  }
-
-  handleBeerCancel() {
-    this.setState({
-      newBeerMenuActive: false
-    })
   }
 
   sortByRank() {
@@ -130,29 +50,6 @@ export default class Nav extends Component {
     this.props.fetchBeers({text: queryText, token: this.props.token})
   }
 
-  handleBeerInput(e) {
-    let value = e.currentTarget.value
-    let field = e.currentTarget.className
-
-    if(field === "beerName") {
-      this.setState({
-        beerFormName: value
-      })
-    }
-
-    if(field === "beerType") {
-      this.setState({
-        beerFormType: value
-      })
-    }
-
-    if(field === "beerRating") {
-      this.setState({
-        beerFormRating: value
-      })
-    }
-  }
-
   render() {
     let beerSubmissionForm = ""
     let beerSubmissionNotification = ""
@@ -165,7 +62,7 @@ export default class Nav extends Component {
     let loginForm = ""
 
     if(this.props.loggedIn) {
-      addBeer = <AddBeer handleNewBeer={this.handleNewBeer} />
+      addBeer = <AddBeer handleNewBeer={this.props.handleNewBeer} />
       loginStatus = <Logout handleLogout={this.props.handleLogout} />
 
       currentBeers = <CurrentBeers
@@ -177,8 +74,8 @@ export default class Nav extends Component {
 
     if(this.props.loginFormActive) {
       loginForm = <LoginForm
-        handleEmail={this.props.handleCredentialInput}
-        handlePassword={this.props.handleCredentialInput}
+        handleEmail={this.props.handleInput}
+        handlePassword={this.props.handleInput}
         handleLogin={this.props.handleLogin}
         handleSignUpForm={this.props.handleSignUpForm}
         handleLoginCancel={this.props.handleCancel}
@@ -189,10 +86,10 @@ export default class Nav extends Component {
 
     if(this.props.signUpFormActive) {
       signUpForm = <SignUpForm
-        handleFirstName={this.props.handleCredentialInput}
-        handleLastName={this.props.handleCredentialInput}
-        handleEmail={this.props.handleCredentialInput}
-        handlePassword={this.props.handleCredentialInput}
+        handleFirstName={this.props.handleInput}
+        handleLastName={this.props.handleInput}
+        handleEmail={this.props.handleInput}
+        handlePassword={this.props.handleInput}
         handleSignUp={this.props.handleSignUp}
         handleCancel={this.props.handleCancel}
       />
@@ -200,13 +97,13 @@ export default class Nav extends Component {
       signUpStatus = ""
     }
 
-    if(this.state.newBeerMenuActive) {
+    if(this.props.newBeerMenuActive) {
       beerSubmissionForm = <BeerForm
         submitNewBeer={this.props.submitNewBeer}
-        handleCancel={this.handleBeerCancel}
-        handleName={this.handleBeerInput}
-        handleType={this.handleBeerInput}
-        handleRating={this.handleBeerInput}
+        handleCancel={this.props.handleCancel}
+        handleName={this.props.handleInput}
+        handleType={this.props.handleInput}
+        handleRating={this.props.handleInput}
       />
     }
 
@@ -230,8 +127,8 @@ export default class Nav extends Component {
           <Dropdown
             fetchBeers={this.props.fetchBeers}
             beerTypes={this.props.beerTypes}
-            toggleMenu={this.toggleBeerTypeMenu}
-            menuActive={this.state.beerTypeMenuActive}
+            toggleMenu={this.props.toggleBeerTypeMenu}
+            menuActive={this.props.beerTypeMenuActive}
             token={this.props.token}
           />
 
