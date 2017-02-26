@@ -7,7 +7,7 @@ export default class Beers extends Component {
     let self = this
     return (
       <ul className="beers">
-        { this.props.beers.map(function (beer) {
+        { this.props.beers.map(function(beer) {
           return (
             <li key={beer.id}>
               <SingleBeer
@@ -18,6 +18,7 @@ export default class Beers extends Component {
                 id={beer.id}
                 loggedIn={self.props.loggedIn}
                 token={self.props.token}
+                fetchBeers={self.props.fetchBeers}
               />
             </li>
           )

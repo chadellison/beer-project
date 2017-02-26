@@ -25,6 +25,7 @@ export default class SingleBeer extends Component {
         id={this.props.id}
         loggedIn={this.props.loggedIn}
         token={this.props.token}
+        fetchBeers={this.props.fetchBeers}
       />
     }
 

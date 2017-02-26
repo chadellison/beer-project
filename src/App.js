@@ -87,7 +87,7 @@ class App extends Component {
 
   handleAddedBeer(beer) {
     let beers = this.state.beers
-    beers.push(beer)
+    beers.unshift(beer)
     this.setState({
       beers: beers
     })
@@ -302,20 +302,25 @@ class App extends Component {
   }
 
   fetchBeers(params={}) {
-    if (params.type === undefined) {
+    // debugger;
+    if(params.type === undefined) {
       params.type = this.state.type
     }
 
-    if (params.text === undefined) {
+    if(params.text === undefined) {
       params.text = this.state.text
     }
 
-    if (params.sort === undefined) {
+    if(params.sort === undefined) {
       params.sort = this.state.sort
     }
 
-    if (params.currentBeers === undefined) {
+    if(params.currentBeers === undefined) {
       params.currentBeers = this.state.currentBeers
+    }
+
+    if(params.token === undefined) {
+      params.token = this.state.token
     }
 
     let searchParams = "type=" +
@@ -382,6 +387,7 @@ class App extends Component {
           beers={this.state.beers}
           loggedIn={this.state.loggedIn}
           token={this.state.token}
+          fetchBeers={this.fetchBeers}
         />
         <Footer />
       </div>
