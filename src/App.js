@@ -11,6 +11,10 @@ import Intro from './components/Intro.js'
 import Beers from './components/Beers.js'
 import Nav from './components/Nav.js'
 import Footer from './components/Footer.js'
+import LoginService from "./services/LoginService.js"
+import BeerService from "./services/BeerService.js"
+import SignUpService from "./services/SignUpService.js"
+import BeerTypesService from "./services/BeerTypesService.js"
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +24,6 @@ class App extends Component {
     this.handleAddedBeer       = this.handleAddedBeer.bind(this)
     this.handleInput           = this.handleInput.bind(this)
     this.handleLogin           = this.handleLogin.bind(this)
-    this.sendLoginCredentials  = this.sendLoginCredentials.bind(this)
     this.handleLoginForm       = this.handleLoginForm.bind(this)
     this.handleLogout          = this.handleLogout.bind(this)
     this.handleSignUp          = this.handleSignUp.bind(this)
@@ -29,10 +32,8 @@ class App extends Component {
     this.closeNotification     = this.closeNotification.bind(this)
     this.handleCurrentBeers    = this.handleCurrentBeers.bind(this)
     this.submitNewBeer         = this.submitNewBeer.bind(this)
-    this.sendBeerData          = this.sendBeerData.bind(this)
     this.toggleBeerTypeMenu    = this.toggleBeerTypeMenu.bind(this)
     this.handleNewBeer         = this.handleNewBeer.bind(this)
-    this.sendSignUpCredentials = this.sendSignUpCredentials.bind(this)
     this.state = {
       beers: [],
       beerTypes: [],
@@ -99,48 +100,12 @@ class App extends Component {
     })
   }
 
-  sendBeerData() {
-    return(
-      fetch("http://localhost:3001/api/v1/beers", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          beer: {
-            name: this.state.beerFormName,
-            beer_type: this.state.beerFormType,
-            rating: this.state.beerFormRating
-          },
-          token: this.state.token
-        })
-      })
-    )
-  }
-
-  sendSignUpCredentials() {
-    return(
-      fetch("http://localhost:3001/api/v1/users", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user: {
-            first_name: this.state.firstName,
-            last_name: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password
-          }
-        })
-      })
-    )
-  }
-
   submitNewBeer() {
-    this.sendBeerData()
+    let beerService = new BeerService
+    beerService.sendBeerData(this.state.beerFormName,
+                             this.state.beerFormType,
+                             this.state.beerFormRating,
+                             this.state.token)
     .then((response) => {
       if (response.status === 201) {
         return response.json()
@@ -164,7 +129,11 @@ class App extends Component {
   }
 
   handleSignUp() {
-    this.sendSignUpCredentials()
+    let signUpService = new SignUpService
+    signUpService.sendSignUpCredentials(this.state.firstName,
+                                        this.state.lastName,
+                                        this.state.email,
+                                        this.state.password)
     .then((response) => {
       if (response.status === 201) {
         return response.json()
@@ -190,7 +159,8 @@ class App extends Component {
   }
 
   handleLogin() {
-    this.sendLoginCredentials()
+    let loginService = new LoginService
+    loginService.sendLoginCredentials(this.state.email, this.state.password)
     .then((response) => {
       if (response.status === 200) {
         return response.json()
@@ -208,24 +178,6 @@ class App extends Component {
     .catch((error) => {
       alert(error);
     })
-  }
-
-  sendLoginCredentials() {
-    return(
-      fetch("http://localhost:3001/api/v1/authentication", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          credentials: {
-            email: this.state.email,
-            password: this.state.password
-          }
-        })
-      })
-    )
   }
 
   handleLogout() {
@@ -336,13 +288,8 @@ class App extends Component {
     let searchParams = "current_beers=" + params.currentBeers +
                        "&" + "token=" + params.token
 
-    fetch("http://localhost:3001/api/v1/beer_types?" + searchParams, {
-      method: "GET",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+    let beerTypesService = new BeerTypesService
+    beerTypesService.fetchBeerTypes(searchParams)
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({
@@ -378,13 +325,8 @@ class App extends Component {
                        "&" + "current_beers=" + params.currentBeers +
                        "&" + "token=" + params.token
 
-    fetch("http://localhost:3001/api/v1/beers?" + searchParams, {
-      method: "GET",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+    let beerService = new BeerService
+    beerService.fetchBeers(searchParams)
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({
@@ -436,7 +378,11 @@ class App extends Component {
 
         />
         <Intro />
-        <Beers beers={this.state.beers} />
+        <Beers
+          beers={this.state.beers}
+          loggedIn={this.state.loggedIn}
+          token={this.state.token}
+        />
         <Footer />
       </div>
     );

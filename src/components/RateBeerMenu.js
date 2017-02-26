@@ -6,13 +6,20 @@ export default class RateBeerMenu extends Component {
     this.handleRating = this.handleRating.bind(this)
   }
 
+  sendRating() {
+
+  }
+
   handleRating(e) {
     let rating = e.currentTarget.textContent
     this.props.toggleRateBeer()
-    alert("you rated this beer " + rating)
-    // need login state
-    // need token
-    // need currentBeers state
+    if(this.props.loggedIn) {
+      // api request
+      // this.sendRating()
+    } else {
+      alert("Please login or create an account to rate this beer")
+    }
+    alert("you rated this beer " + rating + " with beer id " + this.props.id + " with loggin status " + this.props.loggedIn + " and token " + this.props.token)
   }
 
   render() {

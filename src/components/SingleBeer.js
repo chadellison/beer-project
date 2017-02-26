@@ -20,7 +20,12 @@ export default class SingleBeer extends Component {
   render() {
     let rateBeer = ""
     if(this.state.rateBeerMenu) {
-      rateBeer = <RateBeerMenu toggleRateBeer={this.toggleRateBeer}/>
+      rateBeer = <RateBeerMenu
+        toggleRateBeer={this.toggleRateBeer}
+        id={this.props.id}
+        loggedIn={this.props.loggedIn}
+        token={this.props.token}
+      />
     }
 
     return (

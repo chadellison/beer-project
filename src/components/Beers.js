@@ -9,11 +9,16 @@ export default class Beers extends Component {
       <ul className="beers">
         { this.props.beers.map(function (beer) {
           return (
-            <li key={beer.id}><SingleBeer
-                              image={beer.image}
-                              name={beer.name}
-                              rating={beer.average_rating}
-                              type={beer.beer_type} />
+            <li key={beer.id}>
+              <SingleBeer
+                image={beer.image}
+                name={beer.name}
+                rating={beer.average_rating}
+                type={beer.beer_type}
+                id={beer.id}
+                loggedIn={self.props.loggedIn}
+                token={self.props.token}
+              />
             </li>
           )
         })}
