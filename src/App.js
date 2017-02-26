@@ -208,9 +208,9 @@ class App extends Component {
       })
     }
 
-    if(field === "beerRating") {
+    if(field === "addBeerRating") {
       this.setState({
-        beerFormRating: value
+        beerFormRating: e.currentTarget.textContent
       })
     }
 
@@ -241,21 +241,23 @@ class App extends Component {
 
   handleCancel(e) {
     let field = e.currentTarget.className
-    if(field === "cancelLoginMenu") {
+    if(field === "cancelLoginMenu" || field === "cancelSignUpMenu") {
       this.setState({
-        loginFormActive: false
-      })
-    }
-
-    if(field === "cancelSignUpMenu") {
-      this.setState({
-        signUpFormActive: false
+        loginFormActive: false,
+        signUpFormActive: false,
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: ""
       })
     }
 
     if(field === "cancelBeerMenu") {
       this.setState({
-        newBeerMenuActive: false
+        newBeerMenuActive: false,
+        beerFormName: "",
+        beerFormRating: "",
+        beerFormType: ""
       })
     }
   }
@@ -302,7 +304,6 @@ class App extends Component {
   }
 
   fetchBeers(params={}) {
-    // debugger;
     if(params.type === undefined) {
       params.type = this.state.type
     }
