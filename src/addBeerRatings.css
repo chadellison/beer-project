@@ -11,13 +11,13 @@
   background-color: white;
   outline: none;
   transition: all ease 0.3s;
-  border-bottom: 3px solid #d65302;
+  border-bottom: 3px solid #ed4b1e;;
   width: 40px;
   height: 20px;
 
 }
 
 .addBeerRating:hover, .addBeerRating:focus {
-  background-color: #d65302;
+  background-color: #ed4b1e;;
   transition: all ease 0.3s;
 }

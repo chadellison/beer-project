@@ -55,8 +55,9 @@
 }
 
 .rateBeer:hover {
-  background-color: #e2d9ce;
   transition: all ease 0.3s;
+  background-color: #ffffff;
+  border-bottom: 5px solid #ed4b1e;
 }
 
 .rateBeer {
@@ -68,7 +69,7 @@
   font-weight: bold;
   outline: none;
   border: 1px solid #6d6d6d;
-  border-bottom: 5px solid #d65302;
+  /*background-color: #e2d9ce;*/
 }
 
 .beerImage {

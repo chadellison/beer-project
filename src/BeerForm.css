@@ -41,7 +41,7 @@
   transition: all ease 0.3s;
 }
 
-.cancelLoginMenu, .cancelBeerMenu, .cancelSignUpMenu {
+.cancelLoginMenu, .cancelSignUpMenu, .cancelBeerMenu {
   margin-bottom: 20px;
   height: 30px;
   border-radius: 0px;
