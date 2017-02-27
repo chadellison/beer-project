@@ -35,7 +35,7 @@ export default class SingleBeer extends Component {
         <div className="beerName"><strong>Name:</strong> {this.props.name}</div>
         <div className="beerType"><strong>Type:</strong> {this.props.type}</div>
         <div className="beerRating"><strong>Rating:</strong> {this.props.rating}</div>
-        <button className="rateBeer" onClick={this.toggleRateBeer}>Rate Beer</button>
+        <button className="rateBeer other" onClick={this.toggleRateBeer}>Rate Beer</button>
         {rateBeer}
       </div>
     )

@@ -206,8 +206,7 @@ class App extends Component {
         beerFormType: value
       })
     }
-
-    if(field === "addBeerRating") {
+    if(field.includes("addBeerRating")) {
       this.setState({
         beerFormRating: e.currentTarget.textContent
       })
