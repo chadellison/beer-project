@@ -18,10 +18,10 @@
 
 .rating:hover {
   background-color: #ed4b1e;
-  transition: all ease 0.3s;
+  transition: background-colore 0.3s;
 }
 
 .highlight {
   background-color: #ed4b1e;
-  transition: all ease 0.1s;
+  transition: background-color 0.1s;
 }

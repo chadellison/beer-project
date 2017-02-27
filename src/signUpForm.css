@@ -14,5 +14,10 @@
 
 .signUpSubmit:hover {
   background-color: #1155c1;
-  transition: all ease 0.3s;
+  transition: background-color 0.3s;
+}
+
+.signUpSubmit:active {
+  margin-top: 22px;
+  margin-bottom: 18px;
 }

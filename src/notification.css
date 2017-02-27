@@ -14,10 +14,15 @@
   color: white;
   font-size: 15px;
   outline: none;
-  transition: all ease 0.3s;
+  transition: background-color 0.3s;
 }
 
 .notificationButton:hover {
   background-color: #ff9d00;
-  transition: all ease 0.3s;
+  transition: background-color 0.3s;
+}
+
+.notificationButton:active {
+  margin-top: 22px;
+  margin-bottom: 18px;
 }
