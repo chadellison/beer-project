@@ -4,9 +4,14 @@ import SingleBeer from './SingleBeer'
 
 export default class Beers extends Component {
   render() {
+    let opacity = ""
+    if(this.props.loginFormActive || this.props.signUpFormActive) {
+      opacity = " opaque"
+    }
+
     let self = this
     return (
-      <ul className="beers">
+      <ul className={"beers" + opacity}>
         { this.props.beers.map(function(beer) {
           return (
             <li key={beer.id}>

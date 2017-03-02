@@ -60,6 +60,7 @@ export default class Nav extends Component {
     let currentBeers = ""
     let loginStatus = <LoginStatus handleLoginForm={this.props.handleLoginForm} />
     let loginForm = ""
+    let opacity = ""
 
     if(this.props.loggedIn) {
       addBeer = <AddBeer handleNewBeer={this.props.handleNewBeer} />
@@ -82,6 +83,7 @@ export default class Nav extends Component {
       />
       loginStatus = ""
       signUpStatus = ""
+      opacity = " opaque"
     }
 
     if(this.props.signUpFormActive) {
@@ -95,6 +97,7 @@ export default class Nav extends Component {
       />
       loginStatus = ""
       signUpStatus = ""
+      opacity = " opaque"
     }
 
     if(this.props.newBeerMenuActive) {
@@ -123,7 +126,7 @@ export default class Nav extends Component {
 
     return (
       <div>
-        <ul className="navBar">
+        <ul className={"navBar" + opacity}>
           <Dropdown
             fetchBeers={this.props.fetchBeers}
             beerTypes={this.props.beerTypes}

@@ -285,6 +285,13 @@ class App extends Component {
   }
 
   fetchBeerTypes(params={}) {
+    if(params.currentBeers === undefined) {
+      params.currentBeers = this.state.currentBeers
+    }
+    if(params.token === undefined) {
+      params.token = this.state.token
+    }
+
     let searchParams = "current_beers=" + params.currentBeers +
                        "&" + "token=" + params.token
 
@@ -352,8 +359,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <Nav fetchBeers={this.fetchBeers}
+        <Header
+          loginFormActive={this.state.loginFormActive}
+          signUpFormActive={this.state.signUpFormActive}
+        />
+        <Nav
+          fetchBeers={this.fetchBeers}
           beerTypes={this.state.beerTypes}
           sort={this.state.sort}
           token={this.state.token}
@@ -379,14 +390,18 @@ class App extends Component {
           beerTypeMenuActive={this.state.beerTypeMenuActive}
           handleNewBeer={this.handleNewBeer}
           newBeerMenuActive={this.state.newBeerMenuActive}
-
         />
-        <Intro />
+        <Intro
+          loginFormActive={this.state.loginFormActive}
+          signUpFormActive={this.state.signUpFormActive}
+        />
         <Beers
           beers={this.state.beers}
           loggedIn={this.state.loggedIn}
           token={this.state.token}
           fetchBeers={this.fetchBeers}
+          loginFormActive={this.state.loginFormActive}
+          signUpFormActive={this.state.signUpFormActive}
         />
         <Footer />
       </div>
