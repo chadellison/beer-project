@@ -19,8 +19,8 @@ import LoginStatus from "./LoginStatus.js"
 export default class Nav extends Component {
   constructor(props) {
     super(props)
-    this.searchBeers           = this.searchBeers.bind(this)
-    this.sortByRank            = this.sortByRank.bind(this)
+    this.searchBeers = this.searchBeers.bind(this)
+    this.sortByRank  = this.sortByRank.bind(this)
   }
 
   sortByRank() {

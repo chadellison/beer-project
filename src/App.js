@@ -51,7 +51,8 @@ class App extends Component {
       beerFromType: "",
       beerFormRating: "",
       beerTypeMenuActive: false,
-      newBeerMenuActive: false
+      newBeerMenuActive: false,
+      page: 1
     }
   }
 
@@ -326,12 +327,17 @@ class App extends Component {
       params.token = this.state.token
     }
 
+    if(params.page === undefined) {
+      params.page = this.state.page
+    }
+
     let searchParams = "type=" +
                        params.type.toLowerCase() +
                        "&" + "text=" + params.text.toLowerCase() +
                        "&" + "sort=" + params.sort +
                        "&" + "current_beers=" + params.currentBeers +
-                       "&" + "token=" + params.token
+                       "&" + "token=" + params.token +
+                       "&" + "page=" + params.page
 
     let beerService = new BeerService
     beerService.fetchBeers(searchParams)
@@ -349,7 +355,8 @@ class App extends Component {
       type: params.type,
       text: params.text,
       sort: params.sort,
-      currentBeers: params.currentBeers
+      currentBeers: params.currentBeers,
+      page: params.page
     })
   }
 
@@ -393,6 +400,9 @@ class App extends Component {
           signUpFormActive={this.state.signUpFormActive}
         />
         <PreviousAndNext
+          beerCount={this.state.beers.length}
+          page={this.state.page}
+          fetchBeers={this.fetchBeers}
           loginFormActive={this.state.loginFormActive}
           signUpFormActive={this.state.signUpFormActive}
         />
@@ -405,6 +415,9 @@ class App extends Component {
           signUpFormActive={this.state.signUpFormActive}
         />
         <PreviousAndNext
+          beerCount={this.state.beers.length}
+          page={this.state.page}
+          fetchBeers={this.fetchBeers}
           loginFormActive={this.state.loginFormActive}
           signUpFormActive={this.state.signUpFormActive}
         />

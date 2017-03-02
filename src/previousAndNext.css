@@ -19,3 +19,24 @@
   padding-top: 20px;
   display: inline-block;
 }
+
+.previous:hover, .next:hover {
+  cursor: pointer;
+  color: #4286f4;
+  transition: color 0.3s;
+}
+
+.previousImage:hover, .nextImage:hover {
+  opacity: .5;
+  cursor: pointer;
+  width: 35px;
+  margin-bottom: -15px;
+}
+
+.previousImage:hover {
+  margin-left: -5px;
+}
+
+.nextImage:hover {
+  margin-right: -5px;
+}
