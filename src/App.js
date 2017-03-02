@@ -1,15 +1,12 @@
 import React, { Component } from "react"
 import "./App.css"
-import "./header.css"
-import "./nav.css"
-import "./footer.css"
 import "./body.css"
-import "./BeerForm.css"
 import Header from "./components/Header.js"
 import Intro from "./components/Intro.js"
 import Beers from "./components/Beers.js"
 import Nav from "./components/Nav.js"
 import Footer from "./components/Footer.js"
+import PreviousAndNext from "./components/PreviousAndNext.js"
 import LoginService from "./services/LoginService.js"
 import BeerService from "./services/BeerService.js"
 import SignUpService from "./services/SignUpService.js"
@@ -395,11 +392,19 @@ class App extends Component {
           loginFormActive={this.state.loginFormActive}
           signUpFormActive={this.state.signUpFormActive}
         />
+        <PreviousAndNext
+          loginFormActive={this.state.loginFormActive}
+          signUpFormActive={this.state.signUpFormActive}
+        />
         <Beers
           beers={this.state.beers}
           loggedIn={this.state.loggedIn}
           token={this.state.token}
           fetchBeers={this.fetchBeers}
+          loginFormActive={this.state.loginFormActive}
+          signUpFormActive={this.state.signUpFormActive}
+        />
+        <PreviousAndNext
           loginFormActive={this.state.loginFormActive}
           signUpFormActive={this.state.signUpFormActive}
         />

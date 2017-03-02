@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import "../App.css"
+import "../notification.css"
 
 export default class CustomNotification extends Component {
   render() {

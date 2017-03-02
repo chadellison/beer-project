@@ -1,0 +1,21 @@
+.previousAndNext {
+  text-align: center;
+}
+
+.previous, .next {
+  padding-left: 15px;
+  padding-right: 15px;
+  display: inline-block;
+  margin-bottom: 10px
+}
+
+.previousImage, .nextImage {
+  width: 30px;
+  display: inline-block;
+  margin-bottom: -10px;
+}
+
+.previousImageDiv, .nextImageDiv {
+  padding-top: 20px;
+  display: inline-block;
+}

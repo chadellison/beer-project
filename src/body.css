@@ -24,10 +24,6 @@
     margin: 120px auto;
   }
 
-  .title {
-    margin-top: -230px;
-  }
-
   .appIntro {
     padding-top: 100px;
   }
@@ -47,7 +43,6 @@
 .beers {
   margin-left: 3%;
   padding-top: 50px;
-  padding-bottom: 200px;
 }
 
 .beerName, .beerType, .beerRating, .beerImage, .rateBeer {

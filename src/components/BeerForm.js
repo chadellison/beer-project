@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "../App.css"
 import "../addBeerRatings.css"
+import "../BeerForm.css"
 
 export default class BeerForm extends Component {
   constructor(props) {
