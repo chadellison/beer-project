@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import '../App.css'
+import React, { Component } from "react"
+import "../App.css"
 import BeerTypes from "./BeerTypes.js"
 
 export default class Dropdown extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.handleSelectedBeerType = this.handleSelectedBeerType.bind(this)
     this.state = {
       beerType: "all types"
-    };
+    }
   }
 
   handleSelectedBeerType(e) {
