@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "../App.css"
 import "../search.css"
 
 export default class Search extends Component {

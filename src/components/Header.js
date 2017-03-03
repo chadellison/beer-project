@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import beer from '../beer.png';
 import "../header.css"
-import '../App.css';
 
 export default class Header extends Component {
   render() {

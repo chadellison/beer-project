@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "../App.css"
 import "../nav.css"
 import Dropdown from './Dropdown.js'
 import BeerForm from "./BeerForm.js"

@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "../App.css"
 import "../signUpForm.css"
 
 export default class SignUpForm extends Component {

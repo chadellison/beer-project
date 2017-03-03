@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "../App.css"
 import BeerTypes from "./BeerTypes.js"
 
 export default class Dropdown extends Component {
