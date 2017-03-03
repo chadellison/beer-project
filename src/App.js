@@ -143,17 +143,11 @@ class App extends Component {
     .then((responseJson) => {
       let hosts = new Hosts
       let message = ""
-      
-      if(hosts.apiHost() === "https://beer-server0123.herokuapp.com") {
-        this.handleLogin()
-        message = "Welcome to the Beer Project " + this.state.firstName + ". You're ready to add beers"
-      } else {
-        message = "An email to confirm your account has been sent"
-      }
+
       this.setState({
         signUpFormActive: false,
         signUpNotification: true,
-        notificationMessage: message
+        notificationMessage: "An email to confirm your account has been sent"
       })
     })
     .catch((error) => {
