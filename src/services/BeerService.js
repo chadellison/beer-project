@@ -4,7 +4,7 @@ export default class BeerService {
   sendBeerData(name, beer_type, rating, token) {
     let host = new Hosts
     return(
-      fetch(host.api_host() + "/api/v1/beers", {
+      fetch(host.apiHost() + "/api/v1/beers", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -25,7 +25,7 @@ export default class BeerService {
   fetchBeers(searchParams) {
     let host = new Hosts
     return(
-      fetch(host.api_host() + "/api/v1/beers?" + searchParams, {
+      fetch(host.apiHost() + "/api/v1/beers?" + searchParams, {
         method: "GET",
         headers: {
           'Accept': 'application/json',

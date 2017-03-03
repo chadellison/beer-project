@@ -4,7 +4,7 @@ export default class LoginService {
   sendLoginCredentials(email, password) {
     let host = new Hosts
     return(
-      fetch(host.api_host() + "/api/v1/authentication", {
+      fetch(host.apiHost() + "/api/v1/authentication", {
         method: "POST",
         headers: {
           'Accept': 'application/json',

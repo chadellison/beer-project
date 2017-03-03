@@ -1,5 +1,5 @@
 export default class Hosts {
-  api_host() {
+  apiHost() {
     if(window.location.hostname === "localhost") {
       return "http://localhost:3001"
     } else {

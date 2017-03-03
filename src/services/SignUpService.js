@@ -4,7 +4,7 @@ export default class SignUpService {
   sendSignUpCredentials(firstName, lastName, email, password) {
     let host = new Hosts
     return(
-      fetch(host.api_host() + "/api/v1/users", {
+      fetch(host.apiHost() + "/api/v1/users", {
         method: "POST",
         headers: {
           'Accept': 'application/json',

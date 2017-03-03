@@ -114,7 +114,7 @@ export default class Nav extends Component {
     if(this.props.signUpNotification) {
       signUpNotification = <CustomNotification
         closeNotification={this.props.closeNotification}
-        notificationText="An email to confirm your account has been sent"
+        notificationMessage={this.props.notificationMessage}
       />
     }
 

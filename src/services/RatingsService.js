@@ -4,7 +4,7 @@ export default class RatingsService {
   sendBeerRating(rating, beer_id, token) {
     let host = new Hosts
     return(
-      fetch(host.api_host() + "/api/v1/ratings", {
+      fetch(host.apiHost() + "/api/v1/ratings", {
         method: "POST",
         headers: {
           'Accept': 'application/json',

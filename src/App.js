@@ -7,6 +7,7 @@ import Beers from "./components/Beers.js"
 import Nav from "./components/Nav.js"
 import Footer from "./components/Footer.js"
 import PreviousAndNext from "./components/PreviousAndNext.js"
+import Hosts from "./config/Hosts.js"
 import LoginService from "./services/LoginService.js"
 import BeerService from "./services/BeerService.js"
 import SignUpService from "./services/SignUpService.js"
@@ -40,6 +41,7 @@ class App extends Component {
       loginFormActive: false,
       signUpFormActive: false,
       signUpNotification: false,
+      notificationMessage: "",
       submissionNotification: false,
       loggedIn: false,
       firstName: "",
@@ -139,9 +141,19 @@ class App extends Component {
       }
     })
     .then((responseJson) => {
+      let hosts = new Hosts
+      let message = ""
+      
+      if(hosts.apiHost() === "https://beer-server0123.herokuapp.com") {
+        this.handleLogin()
+        message = "Welcome to the Beer Project " + this.state.firstName + ". You're ready to add beers"
+      } else {
+        message = "An email to confirm your account has been sent"
+      }
       this.setState({
         signUpFormActive: false,
-        signUpNotification: true
+        signUpNotification: true,
+        notificationMessage: message
       })
     })
     .catch((error) => {
@@ -395,6 +407,7 @@ class App extends Component {
           handleSignUp={this.handleSignUp}
           handleCancel={this.handleCancel}
           signUpNotification={this.state.signUpNotification}
+          notificationMessage={this.state.notificationMessage}
           submissionNotification={this.state.submissionNotification}
           closeNotification={this.closeNotification}
           submitNewBeer={this.submitNewBeer}
