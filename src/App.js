@@ -361,6 +361,16 @@ class App extends Component {
   }
 
   render() {
+    let footerPreviousAndNext = ""
+    if(this.state.beers.length > 8) {
+      footerPreviousAndNext = <PreviousAndNext
+        beerCount={this.state.beers.length}
+        page={this.state.page}
+        fetchBeers={this.fetchBeers}
+        loginFormActive={this.state.loginFormActive}
+        signUpFormActive={this.state.signUpFormActive}
+      />
+    }
     return (
       <div className="App">
         <Header
@@ -414,13 +424,7 @@ class App extends Component {
           loginFormActive={this.state.loginFormActive}
           signUpFormActive={this.state.signUpFormActive}
         />
-        <PreviousAndNext
-          beerCount={this.state.beers.length}
-          page={this.state.page}
-          fetchBeers={this.fetchBeers}
-          loginFormActive={this.state.loginFormActive}
-          signUpFormActive={this.state.signUpFormActive}
-        />
+        {footerPreviousAndNext}
         <Footer />
       </div>
     );
