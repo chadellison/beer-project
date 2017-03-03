@@ -1,7 +1,10 @@
+import Hosts from "../config/Hosts.js"
+
 export default class LoginService {
   sendLoginCredentials(email, password) {
+    let host = new Hosts
     return(
-      fetch("http://localhost:3001/api/v1/authentication", {
+      fetch(host.api_host() + "/api/v1/authentication", {
         method: "POST",
         headers: {
           'Accept': 'application/json',

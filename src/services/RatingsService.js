@@ -1,7 +1,10 @@
+import Hosts from "../config/Hosts.js"
+
 export default class RatingsService {
   sendBeerRating(rating, beer_id, token) {
+    let host = new Hosts
     return(
-      fetch("http://localhost:3001/api/v1/ratings", {
+      fetch(host.api_host() + "/api/v1/ratings", {
         method: "POST",
         headers: {
           'Accept': 'application/json',

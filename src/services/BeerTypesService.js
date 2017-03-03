@@ -1,7 +1,10 @@
+import Hosts from "../config/Hosts.js"
+
 export default class BeerTypesService {
   fetchBeerTypes(searchParams) {
+    let host = new Hosts
     return(
-      fetch("http://localhost:3001/api/v1/beer_types?" + searchParams, {
+      fetch(host.api_host() + "/api/v1/beer_types?" + searchParams, {
         method: "GET",
         headers: {
           'Accept': 'application/json',
