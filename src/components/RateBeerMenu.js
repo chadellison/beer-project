@@ -82,6 +82,7 @@ export default class RateBeerMenu extends Component {
 
   handleRating(e) {
     let rating = e.currentTarget.textContent
+    let message = ""
     this.props.toggleRateBeer()
 
     if(this.props.loggedIn) {
@@ -89,21 +90,27 @@ export default class RateBeerMenu extends Component {
 
       ratingsService.sendBeerRating(rating, this.props.id, this.props.token)
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status[0] !== 5) {
           return response.json()
         } else {
-          throw "We were unable to process your request"
+          throw "The server responded with an error"
         }
       })
       .then((responseJson) => {
-        this.props.fetchBeers()
-        alert("You rated " + responseJson.name + " " + rating)
+        if(responseJson.errors) {
+          this.props.updateMessageNotification(responseJson.errors)
+        } else {
+          message = "You rated " + responseJson.name + " " + rating
+          this.props.fetchBeers()
+          this.props.updateMessageNotification(message)
+        }
       })
       .catch((error) => {
         alert(error);
       })
     } else {
-      alert("Please login or create an account to rate this beer")
+      message = "Please login or create an account to rate this beer"
+      this.props.updateMessageNotification(message)
     }
   }
 

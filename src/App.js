@@ -16,21 +16,22 @@ import BeerTypesService from "./services/BeerTypesService.js"
 class App extends Component {
   constructor(props) {
     super(props)
-    this.fetchBeers            = this.fetchBeers.bind(this)
-    this.fetchBeerTypes        = this.fetchBeerTypes.bind(this)
-    this.handleAddedBeer       = this.handleAddedBeer.bind(this)
-    this.handleInput           = this.handleInput.bind(this)
-    this.handleLogin           = this.handleLogin.bind(this)
-    this.handleLoginForm       = this.handleLoginForm.bind(this)
-    this.handleLogout          = this.handleLogout.bind(this)
-    this.handleSignUp          = this.handleSignUp.bind(this)
-    this.handleSignUpForm      = this.handleSignUpForm.bind(this)
-    this.handleCancel          = this.handleCancel.bind(this)
-    this.closeNotification     = this.closeNotification.bind(this)
-    this.handleCurrentBeers    = this.handleCurrentBeers.bind(this)
-    this.submitNewBeer         = this.submitNewBeer.bind(this)
-    this.toggleBeerTypeMenu    = this.toggleBeerTypeMenu.bind(this)
-    this.handleNewBeer         = this.handleNewBeer.bind(this)
+    this.fetchBeers                = this.fetchBeers.bind(this)
+    this.fetchBeerTypes            = this.fetchBeerTypes.bind(this)
+    this.handleAddedBeer           = this.handleAddedBeer.bind(this)
+    this.handleInput               = this.handleInput.bind(this)
+    this.handleLogin               = this.handleLogin.bind(this)
+    this.handleLoginForm           = this.handleLoginForm.bind(this)
+    this.handleLogout              = this.handleLogout.bind(this)
+    this.handleSignUp              = this.handleSignUp.bind(this)
+    this.handleSignUpForm          = this.handleSignUpForm.bind(this)
+    this.handleCancel              = this.handleCancel.bind(this)
+    this.closeNotification         = this.closeNotification.bind(this)
+    this.handleCurrentBeers        = this.handleCurrentBeers.bind(this)
+    this.submitNewBeer             = this.submitNewBeer.bind(this)
+    this.toggleBeerTypeMenu        = this.toggleBeerTypeMenu.bind(this)
+    this.handleNewBeer             = this.handleNewBeer.bind(this)
+    this.updateMessageNotification = this.updateMessageNotification.bind(this)
     this.state = {
       beers: [],
       beerTypes: [],
@@ -40,9 +41,7 @@ class App extends Component {
       sort: false,
       loginFormActive: false,
       signUpFormActive: false,
-      signUpNotification: false,
-      notificationMessage: "",
-      submissionNotification: false,
+      messageNotification: "",
       loggedIn: false,
       firstName: "",
       lastName: "",
@@ -99,6 +98,12 @@ class App extends Component {
     })
   }
 
+  updateMessageNotification(message) {
+    this.setState({
+      messageNotification: message
+    })
+  }
+
   submitNewBeer() {
     let beerService = new BeerService
     beerService.sendBeerData(this.state.beerFormName,
@@ -106,21 +111,37 @@ class App extends Component {
                              this.state.beerFormRating,
                              this.state.token)
     .then((response) => {
-      if (response.status === 201) {
+      if (response.status[0] !== 5) {
         return response.json()
       } else {
-        throw "We were unable to process your request"
+        throw "The server responded with an error"
       }
     })
     .then((responseJson) => {
-      if(this.state.currentBeers === "my beers") {
-        this.handleAddedBeer(responseJson)
-      }
+      if(responseJson.errors) {
+        let errors = responseJson.errors
+        let message = ""
+        if(errors.name) {
+          message += "Name " + errors.name + " "
+        }
+        if(errors.beer_type) {
+          message += "Beer type " + errors.beer_type
+        }
+        this.setState({
+          messageNotification: message,
+          newBeerMenuActive: false
+        })
+      } else {
+        if(this.state.currentBeers === "my beers") {
+          this.handleAddedBeer(responseJson)
+        }
 
-      this.setState({
-        submissionNotification: true,
-        newBeerMenuActive: false
-      })
+        this.setState({
+          newBeerMenuActive: false,
+          messageNotification: "Your submission is pending approval. Cheers!"
+        })
+        this.fetchBeers()
+      }
     })
     .catch((error) => {
       alert(error);
@@ -134,20 +155,38 @@ class App extends Component {
                                         this.state.email,
                                         this.state.password)
     .then((response) => {
-      if (response.status === 201) {
+      if (response.status[0] !== 5) {
         return response.json()
       } else {
         throw "Invalid Entry"
       }
     })
     .then((responseJson) => {
-      let message = ""
+      if(responseJson.errors) {
+        let errors = responseJson.errors
+        let message = ""
+        if(errors.password) {
+          message += "Password " + errors.password + " "
+        }
+        if(errors.email) {
+          message += "Email " + errors.email + " "
+        }
+        if(errors.first_name) {
+          message += "First name " + errors.first_name + " "
+        }
+        if(errors.last_name) {
+          message += "Last name " + errors.last_name
+        }
 
-      this.setState({
-        signUpFormActive: false,
-        signUpNotification: true,
-        notificationMessage: "An email to confirm your account has been sent"
-      })
+        this.setState({
+          messageNotification: message
+        })
+      } else {
+        this.setState({
+          signUpFormActive: false,
+          messageNotification: "An email to confirm your account has been sent"
+        })
+      }
     })
     .catch((error) => {
       alert(error);
@@ -164,18 +203,25 @@ class App extends Component {
     let loginService = new LoginService
     loginService.sendLoginCredentials(this.state.email, this.state.password)
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status[0] !== 5) {
         return response.json()
       } else {
-        throw "Invalid Credentials"
+        throw "Something went wrong. The server responded with a 500"
       }
     })
     .then((responseJson) => {
-      this.setState({
-        token: responseJson.password_digest,
-        loggedIn: true,
-        loginFormActive: false
-      })
+      if(responseJson.errors) {
+        this.setState({
+          messageNotification: responseJson.errors
+        })
+      } else {
+        this.setState({
+          token: responseJson.password_digest,
+          loggedIn: true,
+          loginFormActive: false,
+          messageNotification: ""
+        })
+      }
     })
     .catch((error) => {
       alert(error);
@@ -265,8 +311,7 @@ class App extends Component {
 
   closeNotification() {
     this.setState({
-      submissionNotification: false,
-      signUpNotification: false
+      messageNotification: ""
     })
   }
 
@@ -279,11 +324,12 @@ class App extends Component {
       changeCurrentBeers = "my beers"
     }
 
-    this.fetchBeers({currentBeers: changeCurrentBeers, token: this.state.token})
+    this.fetchBeers({currentBeers: changeCurrentBeers, token: this.state.token, page: 1})
     this.fetchBeerTypes({currentBeers: changeCurrentBeers, token: this.state.token})
 
     this.setState({
-      currentBeers: changeCurrentBeers
+      currentBeers: changeCurrentBeers,
+      page: 1
     })
   }
 
@@ -399,9 +445,7 @@ class App extends Component {
           handleSignUpForm={this.handleSignUpForm}
           handleSignUp={this.handleSignUp}
           handleCancel={this.handleCancel}
-          signUpNotification={this.state.signUpNotification}
-          notificationMessage={this.state.notificationMessage}
-          submissionNotification={this.state.submissionNotification}
+          messageNotification={this.state.messageNotification}
           closeNotification={this.closeNotification}
           submitNewBeer={this.submitNewBeer}
           handleLogout={this.handleLogout}
@@ -423,6 +467,7 @@ class App extends Component {
           signUpFormActive={this.state.signUpFormActive}
         />
         <Beers
+          updateMessageNotification={this.updateMessageNotification}
           beers={this.state.beers}
           loggedIn={this.state.loggedIn}
           token={this.state.token}

@@ -43,6 +43,7 @@
 .beers {
   margin-left: 3%;
   padding-top: 50px;
+  min-height: 100px;
 }
 
 .beerName, .beerType, .beerRating, .beerImage, .rateBeer {

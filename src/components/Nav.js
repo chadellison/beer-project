@@ -46,8 +46,7 @@ export default class Nav extends Component {
 
   render() {
     let beerSubmissionForm = ""
-    let beerSubmissionNotification = ""
-    let signUpNotification = ""
+    let customNotification = ""
     let addBeer = ""
     let signUpStatus = <SignUpStatus handleSignUpForm={this.props.handleSignUpForm} />
     let signUpForm = ""
@@ -94,7 +93,7 @@ export default class Nav extends Component {
       opacity = " opaque"
     }
 
-    if(this.props.newBeerMenuActive) {
+    if(this.props.newBeerMenuActive && this.props.loggedIn) {
       beerSubmissionForm = <BeerForm
         submitNewBeer={this.props.submitNewBeer}
         handleCancel={this.props.handleCancel}
@@ -104,17 +103,10 @@ export default class Nav extends Component {
       />
     }
 
-    if(this.props.submissionNotification) {
-      beerSubmissionNotification = <CustomNotification
+    if(this.props.messageNotification !== "") {
+      customNotification = <CustomNotification
         closeNotification={this.props.closeNotification}
-        notificationText="Your submission is pending approval. Cheers!"
-      />
-    }
-
-    if(this.props.signUpNotification) {
-      signUpNotification = <CustomNotification
-        closeNotification={this.props.closeNotification}
-        notificationMessage={this.props.notificationMessage}
+        messageNotification={this.props.messageNotification}
       />
     }
 
@@ -137,8 +129,7 @@ export default class Nav extends Component {
           {loginStatus}
           {signUpStatus}
         </ul>
-        {beerSubmissionNotification}
-        {signUpNotification}
+        {customNotification}
         {loginForm}
         {signUpForm}
       </div>

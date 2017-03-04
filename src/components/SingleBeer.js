@@ -34,6 +34,7 @@ export default class SingleBeer extends Component {
         loggedIn={this.props.loggedIn}
         token={this.props.token}
         fetchBeers={this.props.fetchBeers}
+        updateMessageNotification={this.props.updateMessageNotification}
       />
     }
 

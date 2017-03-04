@@ -1,6 +1,40 @@
 .appFooter {
   background-color: #222;
-  height: 150px;
+  height: 200px;
   clear: both;
   margin-top: 75px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.socialMediaLinks {
+  margin-top: 50px;
+  margin-left: 200px;
+  display: inline-block;
+}
+
+.contact {
+  float: right;
+  margin-top: 60px;
+  margin-right: 200px;
+  color: #4e535b;
+}
+
+.contact:hover {
+  color: #adadad;
+  cursor: pointer;
+}
+
+.facebook, .twitter, .instagram {
+  height: 30px;
+  width: 30px;
+  opacity: .5;
+  padding: 5px;
+}
+
+.facebook:hover, .twitter:hover, .instagram:hover {
+  height: 30px;
+  width: 30px;
+  opacity: 1;
 }

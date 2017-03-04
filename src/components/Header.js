@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import beer from '../beer.png';
+import beer from '../../public/beer.png';
 import "../header.css"
 
 export default class Header extends Component {

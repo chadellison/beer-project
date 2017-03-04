@@ -23,6 +23,7 @@ export default class Beers extends Component {
                 loggedIn={self.props.loggedIn}
                 token={self.props.token}
                 fetchBeers={self.props.fetchBeers}
+                updateMessageNotification={self.props.updateMessageNotification}
               />
             </li>
           )
