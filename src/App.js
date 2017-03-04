@@ -91,7 +91,8 @@ class App extends Component {
 
     this.setState({
       newBeerMenuActive: newBeer,
-      beerTypeMenuActive: false
+      beerTypeMenuActive: false,
+      beerFormRating: ""
     })
   }
 
