@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "../loginStatus.css"
 
 export default class LoginStatus extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class LoginStatus extends Component {
 
   render() {
     return (
-      <a href="#" onClick={this.props.handleLoginForm}>login</a>
+      <a href="#" onClick={this.props.handleLoginForm} className="loginStatus">login</a>
     )
   }
 }

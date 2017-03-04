@@ -1,0 +1,11 @@
+.logoutStatus {
+  float: right;
+  position: relative;
+  margin-right: 100px;
+}
+
+@media only screen and (max-width: 700px) {
+  .logoutStatus {
+    margin-right: 50%;
+  }
+}

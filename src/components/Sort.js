@@ -7,7 +7,7 @@ export default class BeerForm extends Component {
 
   render() {
     return (
-      <a href="#" onClick={this.props.sortByRank}>sort beers</a>
+      <a href="#" onClick={this.props.sortByRank} className="sort">sort beers</a>
     )
   }
 }

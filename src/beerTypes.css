@@ -18,3 +18,10 @@
   background-color: white;
   overflow: scroll;
 }
+
+@media only screen and (max-width: 700px) {
+  .beerTypeMenu {
+    position: absolute;
+    z-index: 1;
+  }
+}

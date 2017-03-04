@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "../logoutStatus.css"
 
 export default class Logout extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class Logout extends Component {
 
   render() {
     return (
-      <a href="#" onClick={this.props.handleLogout}>logout </a>
+      <a href="#" onClick={this.props.handleLogout} className="logoutStatus">logout </a>
     )
   }
 }

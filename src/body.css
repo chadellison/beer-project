@@ -11,17 +11,9 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .beerProfile {
-    height: 300px;
-  }
-
   .search {
     margin-bottom: 15px;
     margin-top: 15px;
-  }
-
-  .credentialForm {
-    margin: 120px auto;
   }
 
   .appIntro {

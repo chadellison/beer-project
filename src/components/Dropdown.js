@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import BeerTypes from "./BeerTypes.js"
+import "../currentBeerType.css"
 
 export default class Dropdown extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class Dropdown extends Component {
     }
 
     return (
-      <a href="#" onClick={this.props.toggleMenu}>
+      <a href="#" onClick={this.props.toggleMenu} className="currentBeerType">
         {this.state.beerType}
         {menu}
       </a>
