@@ -141,7 +141,6 @@ class App extends Component {
       }
     })
     .then((responseJson) => {
-      let hosts = new Hosts
       let message = ""
 
       this.setState({
