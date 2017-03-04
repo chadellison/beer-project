@@ -57,7 +57,19 @@ class App extends Component {
     }
   }
 
+  handleParams() {
+    if(window.location.search.substring(1) === "approved=true") {
+      let intro = "Welcome to the beer project! You're all set to login and" +
+        " start adding and browsing beers. Beers that you add will be available" +
+        " only to you until they are approved for all to see."
+      this.setState({
+        messageNotification: intro
+      })
+    }
+  }
+
   componentWillMount() {
+    this.handleParams()
     this.fetchBeers()
     this.fetchBeerTypes()
   }
