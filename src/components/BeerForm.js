@@ -196,11 +196,13 @@ export default class BeerForm extends Component {
     return(
       <div className="submitBeerMenu">
         <h4>Submit Beer</h4>
-        <h5 className="label">name</h5>
+        <h5 className="label">Name</h5>
         <input className="beerName" onChange={this.props.handleName}></input>
-        <h5 className="label">type</h5>
+        <h5 className="label">Type</h5>
         <input className="beerType" onChange={this.props.handleType}></input>
-        <h5 className="label">rating</h5>
+        <h5 className="label">Alcohol by volume</h5>
+        <input className="abv" onChange={this.props.handleAbv}></input>
+        <h5 className="label">Rating</h5>
         <div className="addBeerRatings" onMouseLeave={this.handleRatingHover}>
           { [1, 2, 3, 4, 5].map(function(rating) {
             return(

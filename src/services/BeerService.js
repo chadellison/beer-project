@@ -1,7 +1,7 @@
 import Hosts from "../config/Hosts.js"
 
 export default class BeerService {
-  sendBeerData(name, beer_type, rating, token) {
+  sendBeerData(params={}) {
     let host = new Hosts
     return(
       fetch(host.apiHost() + "/api/v1/beers", {
@@ -12,11 +12,12 @@ export default class BeerService {
         },
         body: JSON.stringify({
           beer: {
-            name: name,
-            beer_type: beer_type,
-            rating: rating
+            name: params.name,
+            beer_type: params.type,
+            abv: params.abv,
+            rating: params.rating
           },
-          token: token
+          token: params.token
         })
       })
     )

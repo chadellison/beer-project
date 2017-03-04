@@ -49,7 +49,8 @@ class App extends Component {
       password: "",
       token: "",
       beerFormName: "",
-      beerFromType: "",
+      beerFormType: "",
+      beerFormAbv: "",
       beerFormRating: "",
       beerTypeMenuActive: false,
       newBeerMenuActive: false,
@@ -92,7 +93,10 @@ class App extends Component {
     this.setState({
       newBeerMenuActive: newBeer,
       beerTypeMenuActive: false,
-      beerFormRating: ""
+      beerFormName: "",
+      beerFormType: "",
+      beerFormRating: "",
+      beerFormAbv: ""
     })
   }
 
@@ -119,10 +123,11 @@ class App extends Component {
 
   submitNewBeer() {
     let beerService = new BeerService
-    beerService.sendBeerData(this.state.beerFormName,
-                             this.state.beerFormType,
-                             this.state.beerFormRating,
-                             this.state.token)
+    beerService.sendBeerData({name: this.state.beerFormName,
+                              type: this.state.beerFormType,
+                              abv: this.state.beerFormAbv,
+                              rating: this.state.beerFormRating,
+                              token: this.state.token})
     .then((response) => {
       if (response.status[0] !== 5) {
         return response.json()
@@ -151,7 +156,11 @@ class App extends Component {
 
         this.setState({
           newBeerMenuActive: false,
-          messageNotification: "Your submission is pending approval. Cheers!"
+          messageNotification: "Your submission is pending approval. Cheers!",
+          beerFormName: "",
+          beerFormType: "",
+          beerFormAbv: "",
+          beerFormRating: ""
         })
         this.fetchBeers()
       }
@@ -268,6 +277,13 @@ class App extends Component {
         beerFormType: value
       })
     }
+
+    if(field === "abv") {
+      this.setState({
+        beerFormAbv: value
+      })
+    }
+
     if(field.includes("addBeerRating")) {
       this.setState({
         beerFormRating: e.currentTarget.textContent
@@ -317,7 +333,8 @@ class App extends Component {
         newBeerMenuActive: false,
         beerFormName: "",
         beerFormRating: "",
-        beerFormType: ""
+        beerFormAbv: "",
+        beerFormType: "",
       })
     }
   }

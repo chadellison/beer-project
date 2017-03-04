@@ -17,8 +17,9 @@ export default class Beers extends Component {
               <SingleBeer
                 image={beer.image}
                 name={beer.name}
-                rating={beer.average_rating}
                 type={beer.beer_type}
+                abv={beer.abv}
+                rating={beer.average_rating}
                 id={beer.id}
                 loggedIn={self.props.loggedIn}
                 token={self.props.token}

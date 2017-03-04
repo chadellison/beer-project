@@ -99,6 +99,7 @@ export default class Nav extends Component {
         handleCancel={this.props.handleCancel}
         handleName={this.props.handleInput}
         handleType={this.props.handleInput}
+        handleAbv={this.props.handleInput}
         handleRating={this.props.handleInput}
       />
     }
