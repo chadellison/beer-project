@@ -41,6 +41,25 @@
   transition: background-color 0.3s;
 }
 
+.submitBeer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 30px;
+  border-radius: 0px;
+  border: none;
+  width: 80%;
+  background-color: #4286f4;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.submitBeer:hover {
+  background-color: #1155c1;
+  transition: background-color 0.3s;
+}
+
 .submit:active {
   margin-top: 22px;
   margin-bottom: 18px;

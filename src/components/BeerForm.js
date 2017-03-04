@@ -213,7 +213,7 @@ export default class BeerForm extends Component {
             )
           })}
         </div>
-        <button className="submit" onClick={this.props.submitNewBeer}>Submit</button>
+        <button className="submitBeer" onClick={this.props.submitNewBeer}>Submit</button>
         <button className="cancelBeerMenu" onClick={this.props.handleCancel}>Cancel</button>
       </div>
     )
