@@ -1,18 +1,22 @@
 .sortMenu {
   margin-top: 15px;
   border: 1px solid gray;
-  width: 240px;
+  width: 180px;
   max-height: 500px;
   position: absolute;
   background-color: white;
-  overflow: scroll;
+  padding-bottom: 30px;
 }
 
 .sortOption {
   display: block;
   color: black;
-  padding: 15px;
-  margin-right: 50px;
+  width: 100px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  /*margin-right: 50px;*/
+  text-align: center;
+  margin: auto;
 }
 
 .sortOption:hover {

@@ -9,7 +9,7 @@ export default class BeerForm extends Component {
   render() {
     let menu = ""
     if(this.props.sortMenuActive) {
-      menu = <SortMenu sortByRank={this.props.sortByRank} />
+      menu = <SortMenu sortBy={this.props.sortBy} />
     }
 
     return (

@@ -39,7 +39,7 @@ class App extends Component {
       currentBeers: "all beers",
       type: "",
       text: "",
-      sort: false,
+      sort: "",
       loginFormActive: false,
       signUpFormActive: false,
       messageNotification: "",

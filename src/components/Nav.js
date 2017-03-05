@@ -17,21 +17,23 @@ export default class Nav extends Component {
   constructor(props) {
     super(props)
     this.searchBeers = this.searchBeers.bind(this)
-    this.sortByRank  = this.sortByRank.bind(this)
+    this.sortBy  = this.sortBy.bind(this)
   }
 
-  sortByRank() {
+  sortBy(e) {
     let sort = ""
-    if(this.props.sort === false) {
-      sort = true
+    let value = e.currentTarget.textContent
+
+    if(value === "By Name") {
+      sort = "name"
     }
 
-    if(this.props.sort === true) {
-      sort = "ascending"
+    if(value === "By Rating") {
+      sort = "rating"
     }
 
-    if(this.props.sort === "ascending") {
-      sort = false
+    if(value === "By ABV") {
+      sort = "abv"
     }
 
     this.props.fetchBeers({sort: sort,
@@ -126,7 +128,7 @@ export default class Nav extends Component {
           {addBeer}
           <Sort toggleSortMenu={this.props.toggleSortMenu}
             sortMenuActive={this.props.sortMenuActive}
-            sortByRank={this.sortByRank}
+            sortBy={this.sortBy}
           />
           {beerSubmissionForm}
           {currentBeers}

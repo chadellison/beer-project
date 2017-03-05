@@ -11,11 +11,11 @@ export default class SortMenu extends Component {
     let self = this
     return(
       <div className="sortMenu">
-        { sortOptions.map(function(option) {
+        { sortOptions.map(function(option, index) {
           return(
-            <a href="#" onClick={self.props.sortByRank} className="sortOption">
+            <div key={index} onClick={self.props.sortBy} className="sortOption">
               {option}
-            </a>
+            </div>
           )
         })}
       </div>
