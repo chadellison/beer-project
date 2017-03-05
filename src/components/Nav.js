@@ -48,6 +48,7 @@ export default class Nav extends Component {
     let beerSubmissionForm = ""
     let customNotification = ""
     let addBeer = ""
+    let sortMenu = ""
     let signUpStatus = <SignUpStatus handleSignUpForm={this.props.handleSignUpForm} />
     let signUpForm = ""
     let currentBeers = ""
@@ -56,7 +57,7 @@ export default class Nav extends Component {
     let opacity = ""
 
     if(this.props.loggedIn) {
-      addBeer = <AddBeer handleNewBeer={this.props.handleNewBeer} />
+      addBeer = <AddBeer toggleNewBeerMenu={this.props.toggleNewBeerMenu} />
       loginStatus = <Logout handleLogout={this.props.handleLogout} />
 
       currentBeers = <CurrentBeers
@@ -123,7 +124,10 @@ export default class Nav extends Component {
           />
 
           {addBeer}
-          <Sort sortByRank={this.sortByRank} />
+          <Sort toggleSortMenu={this.props.toggleSortMenu}
+            sortMenuActive={this.props.sortMenuActive}
+            sortByRank={this.sortByRank}
+          />
           {beerSubmissionForm}
           {currentBeers}
           <Search searchBeers={this.searchBeers} />

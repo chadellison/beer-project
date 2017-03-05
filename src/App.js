@@ -30,7 +30,8 @@ class App extends Component {
     this.handleCurrentBeers        = this.handleCurrentBeers.bind(this)
     this.submitNewBeer             = this.submitNewBeer.bind(this)
     this.toggleBeerTypeMenu        = this.toggleBeerTypeMenu.bind(this)
-    this.handleNewBeer             = this.handleNewBeer.bind(this)
+    this.toggleSortMenu            = this.toggleSortMenu.bind(this)
+    this.toggleNewBeerMenu             = this.toggleNewBeerMenu.bind(this)
     this.updateMessageNotification = this.updateMessageNotification.bind(this)
     this.state = {
       beers: [],
@@ -54,6 +55,7 @@ class App extends Component {
       beerFormRating: "",
       beerTypeMenuActive: false,
       newBeerMenuActive: false,
+      sortMenuActive: false,
       page: 1
     }
   }
@@ -77,26 +79,29 @@ class App extends Component {
 
   toggleBeerTypeMenu() {
     this.setState({
+      newBeerMenuActive: false,
+      sortMenuActive: false,
       beerTypeMenuActive: !this.state.beerTypeMenuActive,
-      newBeerMenuActive: false
     });
   }
 
-  handleNewBeer() {
-    let newBeer = ""
-    if(!this.state.newBeerMenuActive) {
-      newBeer = true
-    } else {
-      newBeer = false
-    }
-
+  toggleSortMenu() {
     this.setState({
-      newBeerMenuActive: newBeer,
       beerTypeMenuActive: false,
+      newBeerMenuActive: false,
+      sortMenuActive: !this.state.sortMenuActive
+    });
+  }
+
+  toggleNewBeerMenu() {
+    this.setState({
+      beerTypeMenuActive: false,
+      sortMenuActive: false,
       beerFormName: "",
       beerFormType: "",
       beerFormRating: "",
-      beerFormAbv: ""
+      beerFormAbv: "",
+      newBeerMenuActive: !this.state.newBeerMenuActive,
     })
   }
 
@@ -482,8 +487,10 @@ class App extends Component {
           loggedIn={this.state.loggedIn}
           toggleBeerTypeMenu={this.toggleBeerTypeMenu}
           beerTypeMenuActive={this.state.beerTypeMenuActive}
-          handleNewBeer={this.handleNewBeer}
+          toggleNewBeerMenu={this.toggleNewBeerMenu}
           newBeerMenuActive={this.state.newBeerMenuActive}
+          sortMenuActive={this.state.sortMenuActive}
+          toggleSortMenu={this.toggleSortMenu}
         />
         <Intro
           loginFormActive={this.state.loginFormActive}
