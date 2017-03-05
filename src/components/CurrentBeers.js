@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "../currentBeers.css"
 
 export default class CurrentBeers extends Component {
   constructor(props) {
@@ -15,7 +16,11 @@ export default class CurrentBeers extends Component {
 
   render() {
     return (
-      <a href="#" onClick={this.props.handleCurrentBeers}>{this.displayText()}</a>
+      <div className="currentBeers">
+        <a href="#" onClick={this.props.handleCurrentBeers}>
+          {this.displayText()}
+        </a>
+      </div>
     )
   }
 }
