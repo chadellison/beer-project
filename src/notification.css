@@ -1,6 +1,15 @@
 .notification {
-  margin: 5%;
+  margin-top: 100px;
+  left: 50%;
+  margin-left: -28%;
+  width: 600px;
+  padding: 50px;
+  padding-right: 100px;
+  padding-left: 100px;
+  border: 1px solid #ed4b1e;
+  background-color: white;
   text-align: center;
+  position: fixed;
 }
 
 .notificationButton {
@@ -9,7 +18,7 @@
   height: 30px;
   border-radius: 0px;
   border: none;
-  width: 20%;
+  width: 180px;
   background-color: #ed4b1e;
   color: white;
   font-size: 15px;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import RateBeerMenu from "./RateBeerMenu.js"
+import "../singleBeer.css"
 
 export default class SingleBeer extends Component {
   constructor(props) {
