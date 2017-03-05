@@ -7,9 +7,10 @@
 
 @media only screen and (max-width: 650px) {
   .loginStatus {
-    margin-top: -80%;
-    text-align: center;
+    right: 30%;
+    margin-top: -40%;
     color: black;
+    position: absolute;
   }
 
   .loginStatus:hover {

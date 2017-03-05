@@ -40,10 +40,9 @@
 
 @media only screen and (max-width: 650px) {
   .credentialForm {
-    margin: 120px auto;
     background-color: white;
     z-index: 1;
-    margin-top: 10px;
+    margin-top: -20%;
     position: fixed;
     margin-left: 53px;
   }
