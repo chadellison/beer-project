@@ -1,15 +1,22 @@
 .notification {
-  margin-top: 100px;
   left: 50%;
-  margin-left: -28%;
+  margin-left: -400px;
   width: 600px;
-  padding: 50px;
+  margin-top: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   padding-right: 100px;
   padding-left: 100px;
   border: 1px solid #ed4b1e;
   background-color: white;
   text-align: center;
   position: fixed;
+}
+@media only screen and (max-width: 700px) {
+  .notification {
+    width: 200px;
+    margin-left: -200px;
+  }
 }
 
 .notificationButton {
