@@ -117,23 +117,23 @@ export default class RateBeerMenu extends Component {
   checkActive(rating) {
     let result = "rating "
     if(rating === 1 && this.state.r1Active) {
-      result += "highlight"
+      result += "one"
     }
 
     if(rating === 2 && this.state.r2Active) {
-      result += "highlight"
+      result += "two"
     }
 
     if(rating === 3 && this.state.r3Active) {
-      result += "highlight"
+      result += "three"
     }
 
     if(rating === 4 && this.state.r4Active) {
-      result += "highlight"
+      result += "four"
     }
 
     if(rating === 5 && this.state.r5Active) {
-      result += "highlight"
+      result += "five"
     }
 
     return result

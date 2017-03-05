@@ -25,47 +25,32 @@ export default class BeerForm extends Component {
   checkActive(rating) {
     let result = "addBeerRating"
     if(rating === 1) {
-      if(this.state.r1Active) {
-        result += " highlight"
-      }
-      if(this.state.r1Click) {
-        result += " clicked"
+      if(this.state.r1Active || this.state.r1Click) {
+        result += " one"
       }
     }
 
     if(rating === 2) {
-      if(this.state.r2Active) {
-        result += " highlight"
-      }
-      if(this.state.r2Click) {
-        result += " clicked"
+      if(this.state.r2Active || this.state.r2Click) {
+        result += " two"
       }
     }
 
     if(rating === 3) {
-      if(this.state.r3Active) {
-        result += " highlight"
-      }
-      if(this.state.r3Click) {
-        result += " clicked"
+      if(this.state.r3Active || this.state.r3Click) {
+        result += " three"
       }
     }
 
     if(rating === 4) {
-      if(this.state.r4Active) {
-        result += " highlight"
-      }
-      if(this.state.r4Click) {
-        result += " clicked"
+      if(this.state.r4Active || this.state.r4Click) {
+        result += " four"
       }
     }
 
     if(rating === 5) {
-      if(this.state.r5Active) {
-        result += " highlight"
-      }
-      if(this.state.r5Click) {
-        result += " clicked"
+      if(this.state.r5Active || this.state.r5Click) {
+        result += " five"
       }
     }
 

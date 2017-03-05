@@ -16,12 +16,27 @@
   height: 20px;
 }
 
-.rating:hover {
-  background-color: #ed4b1e;
-  transition: background-colore 0.3s;
+.one {
+  background-color: #963306;
+  transition: background-color 0.1s;
 }
 
-.highlight {
+.two {
+  background-color: #c93c00;
+  transition: background-color 0.1s;
+}
+
+.three {
   background-color: #ed4b1e;
+  transition: background-color 0.1s;
+}
+
+.four {
+  background-color: #ff8419;
+  transition: background-color 0.1s;
+}
+
+.five {
+  background-color: #ffbd18;
   transition: background-color 0.1s;
 }
