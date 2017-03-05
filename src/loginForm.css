@@ -43,7 +43,8 @@
     background-color: white;
     z-index: 1;
     margin-top: -20%;
-    position: fixed;
-    margin-left: 53px;
+    position: absolute;
+    left: 50%;
+    margin-left: -140px;
   }
 }
