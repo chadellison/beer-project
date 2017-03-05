@@ -38,7 +38,7 @@
   margin-bottom: 18px;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 650px) {
   .credentialForm {
     margin: 120px auto;
     background-color: white;

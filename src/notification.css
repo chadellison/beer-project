@@ -12,7 +12,7 @@
   text-align: center;
   position: fixed;
 }
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 650px) {
   .notification {
     width: 200px;
     margin-left: -200px;

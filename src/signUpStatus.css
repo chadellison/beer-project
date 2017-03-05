@@ -4,3 +4,14 @@
   margin-right: 20px;
   margin-top: 5px;
 }
+
+@media only screen and (max-width: 700px) {
+  .signUpStatus {
+    margin-top: -80%;
+    color: black;
+  }
+
+  .signUpStatus:hover {
+    border-bottom: 5px solid black;
+  }
+}

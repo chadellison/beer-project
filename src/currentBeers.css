@@ -3,7 +3,7 @@
   display: inline-block;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 650px) {
   .currentBeers {
     margin-left: -2%;
   }
