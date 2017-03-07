@@ -16,7 +16,8 @@
 }
 
 .beerImage {
-  width: 100px;
+  height: 180px;
+  margin-bottom: 10px;
 }
 
 .beer {
