@@ -18,6 +18,7 @@ export default class Beers extends Component {
                 image={beer.image}
                 name={beer.name}
                 type={beer.beer_type}
+                brand={beer.brand}
                 abv={beer.abv}
                 rating={beer.average_rating}
                 id={beer.id}

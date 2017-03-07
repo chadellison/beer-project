@@ -52,6 +52,7 @@ class App extends Component {
       beerFormName: "",
       beerFormType: "",
       beerFormAbv: "",
+      beerFormBrand: "",
       beerFormRating: "",
       beerTypeMenuActive: false,
       newBeerMenuActive: false,
@@ -99,8 +100,9 @@ class App extends Component {
       sortMenuActive: false,
       beerFormName: "",
       beerFormType: "",
-      beerFormRating: "",
       beerFormAbv: "",
+      beerFormBrand: "",
+      beerFormRating: "",
       newBeerMenuActive: !this.state.newBeerMenuActive,
     })
   }
@@ -131,6 +133,7 @@ class App extends Component {
     beerService.sendBeerData({name: this.state.beerFormName,
                               type: this.state.beerFormType,
                               abv: this.state.beerFormAbv,
+                              brand: this.state.beerFormBrand,
                               rating: this.state.beerFormRating,
                               token: this.state.token})
     .then((response) => {
@@ -165,6 +168,7 @@ class App extends Component {
           beerFormName: "",
           beerFormType: "",
           beerFormAbv: "",
+          beerFormBrand: "",
           beerFormRating: ""
         })
         this.fetchBeers()
@@ -283,9 +287,15 @@ class App extends Component {
       })
     }
 
-    if(field === "abv") {
+    if(field === "beerAbv") {
       this.setState({
         beerFormAbv: value
+      })
+    }
+
+    if(field === "beerBrand") {
+      this.setState({
+        beerFormBrand: value
       })
     }
 
@@ -337,9 +347,10 @@ class App extends Component {
       this.setState({
         newBeerMenuActive: false,
         beerFormName: "",
-        beerFormRating: "",
-        beerFormAbv: "",
         beerFormType: "",
+        beerFormAbv: "",
+        beerFormBrand: "",
+        beerFormRating: ""
       })
     }
   }

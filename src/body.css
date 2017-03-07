@@ -39,10 +39,6 @@
   padding-top: 50px;
 }
 
-.beerName, .beerType, .beerRating, .beerImage, .rateBeer {
-  padding: 3px;
-}
-
 .rateBeer:hover {
   transition: background-color 0.3s;
   background-color: #ffffff;

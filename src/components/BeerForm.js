@@ -187,6 +187,8 @@ export default class BeerForm extends Component {
         <input className="beerType" onChange={this.props.handleType}></input>
         <h5 className="label">Alcohol by volume</h5>
         <input className="abv" onChange={this.props.handleAbv}></input>
+        <h5 className="label">Brand</h5>
+        <input className="brand" onChange={this.props.handleBrand}></input>
         <h5 className="label">Rating</h5>
         <div className="addBeerRatings" onMouseLeave={this.handleRatingHover}>
           { [1, 2, 3, 4, 5].map(function(rating) {

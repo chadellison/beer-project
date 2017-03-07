@@ -24,6 +24,12 @@ export default class SingleBeer extends Component {
     return field.charAt(0).toUpperCase() + field.slice(1)
   }
 
+  displayBrand(field) {
+    if(field) {
+      return this.displayText(field)
+    }
+  }
+
   displayRating() {
     if(this.props.rating === "0.0") {
       return "not yet rated"
@@ -34,7 +40,7 @@ export default class SingleBeer extends Component {
 
   displayAbv() {
     if(this.props.abv) {
-      return this.props.abv + " %"
+      return this.props.abv + "%"
     }
   }
 
@@ -56,7 +62,8 @@ export default class SingleBeer extends Component {
         <img className="beerImage" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTLgFs_rSTVl48wtFvqrloD_Ci1mLQRz_B9WExrrUnPCdjbD81Lhg"></img>
         <div className="beerName"><strong>Name:</strong> {this.displayText(this.props.name)}</div>
         <div className="beerType"><strong>Type:</strong> {this.displayText(this.props.type)}</div>
-        <div className="abv"><strong>ABV:</strong> {this.displayAbv()}</div>
+        <div className="beerBrand"><strong>Brand:</strong> {this.displayBrand(this.props.brand)}</div>
+        <div className="beerAbv"><strong>ABV:</strong> {this.displayAbv()}</div>
         <div className="beerRating"><strong>Rating:</strong> {this.displayRating()}</div>
         <button className="rateBeer other" onClick={this.toggleRateBeer}>Rate Beer</button>
         {rateBeer}

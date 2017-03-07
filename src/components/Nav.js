@@ -103,6 +103,7 @@ export default class Nav extends Component {
         handleName={this.props.handleInput}
         handleType={this.props.handleInput}
         handleAbv={this.props.handleInput}
+        handleBrand={this.props.handleInput}
         handleRating={this.props.handleInput}
       />
     }

@@ -15,6 +15,7 @@ export default class BeerService {
             name: params.name,
             beer_type: params.type,
             abv: params.abv,
+            brand: params.brand,
             rating: params.rating
           },
           token: params.token
