@@ -15,6 +15,7 @@ import scotch from "../../public/scotch.jpg"
 import sour from "../../public/sour.png"
 import wheat from "../../public/wheat.jpg"
 import stout from "../../public/stout.jpg"
+import bock from "../../public/bock.jpg"
 import ipa from "../../public/ipa.jpg"
 
 
@@ -58,7 +59,7 @@ export default class SingleBeer extends Component {
     if(type.includes("porter")) {
       image = porter
     }
-    if(type.includes("red" && "ale")) {
+    if(type.includes("red")) {
       image = red
     }
     if(type.includes("saison")) {
@@ -75,6 +76,9 @@ export default class SingleBeer extends Component {
     }
     if(type.includes("stout")) {
       image = stout
+    }
+    if(type.includes("bock")) {
+      image = bock
     }
 
     if(type.includes("ipa") || image === "") {
