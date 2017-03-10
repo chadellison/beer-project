@@ -1,4 +1,4 @@
-# Beer Project
+# README
 
 ## Description
 This is a side project in React with a backend Rails API. Users authenticate
