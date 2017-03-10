@@ -16,6 +16,7 @@ The project hosted on Heroku and is available [here.](https://beer-project0123.h
 - Add "show" when user clicks on beer
 - Allow users to see what other users have rated beers
 - Social Media
+- Add total beer count
 
 #### Styling
 - improve Responsive design
