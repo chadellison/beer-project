@@ -8,6 +8,8 @@ beers and rate beers. Beers that are added show up in the "My Beers" tab and onl
 appear in the global beers when their beer is approved by an admin. This is a work
 in progress.
 
+The project hosted on Heroku and is available [here.](https://beer-project0123.herokuapp.com/#)
+
 ## TODO
 
 #### UI
