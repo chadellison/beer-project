@@ -10,19 +10,35 @@
   border-bottom: 5px solid #ed4b1e;
 }
 
+.rateBeer:hover {
+  transition: background-color 0.3s;
+  background-color: #ffffff;
+  background-color: #e2d9ce;
+}
+
 .rateBeer:active {
   margin-top: 7px;
   margin-bottom: 1px;
 }
 
 .beerImage {
-  height: 180px;
+  height: 130px;
   margin-bottom: 10px;
 }
 
 .beer {
   text-align: center;
   margin-bottom: 80px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 20px;
+  padding-top: 50px;
+  height: 350px;
+  background-color: white;
+}
+
+.beer:hover {
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .beerName, .beerType, .beerRating, .beerImage, .rateBeer, .beerAbv, .beerBrand {

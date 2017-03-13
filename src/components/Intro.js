@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import "../intro.css"
 
 export default class Header extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class Header extends Component {
 
     return (
       <p className={"appIntro" + opacity}>
-        <strong>Choose your beer wisely</strong>
+        <strong>Search and rate awesome beers</strong>
       </p>
     )
   }

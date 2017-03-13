@@ -1,0 +1,11 @@
+.appIntro {
+  font-size: large;
+  margin-top: 50px;
+  color: #a54000;
+}
+
+@media only screen and (max-width: 650px) {
+  .appIntro {
+    padding-top: 100px;
+  }
+}

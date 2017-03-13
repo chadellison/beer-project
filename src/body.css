@@ -15,32 +15,9 @@
     margin-bottom: 15px;
     margin-top: 15px;
   }
-
-  .appIntro {
-    padding-top: 100px;
-  }
 }
 
-.appIntro {
-  font-size: large;
-  margin-top: 50px;
-  color: #222;
-}
-
-.beers li {
-  margin: 10px;
-  width: 280px;
-}
-
-.beers {
-  margin: 0 auto;
-  padding-left: 0px;
-  text-align: center;
-  padding-top: 50px;
-}
-
-.rateBeer:hover {
-  transition: background-color 0.3s;
-  background-color: #ffffff;
-  background-color: #e2d9ce;
+body {
+  background-color: #e5e5e5;
+  font-family: courier;
 }

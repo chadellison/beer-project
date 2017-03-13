@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SingleBeer from './SingleBeer'
+import "../beers.css"
 
 export default class Beers extends Component {
   render() {

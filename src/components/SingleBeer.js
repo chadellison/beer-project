@@ -94,7 +94,12 @@ export default class SingleBeer extends Component {
   }
 
   displayText(field) {
-    return field.charAt(0).toUpperCase() + field.slice(1)
+    let text = ""
+    text = field.charAt(0).toUpperCase() + field.slice(1)
+    if(text.length > 17) {
+      text = text.substr(0, 17) + "..."
+    }
+    return text
   }
 
   displayBrand(field) {
@@ -135,8 +140,8 @@ export default class SingleBeer extends Component {
         <img className="beerImage" src={this.findImage(this.props.type)}></img>
         <div className="beerName"><strong>Name:</strong> {this.displayText(this.props.name)}</div>
         <div className="beerType"><strong>Type:</strong> {this.displayText(this.props.type)}</div>
-        <div className="beerAbv"><strong>ABV:</strong> {this.displayAbv()}</div>
         <div className="beerBrand"><strong>Brand:</strong> {this.displayBrand(this.props.brand)}</div>
+        <div className="beerAbv"><strong>ABV:</strong> {this.displayAbv()}</div>
         <div className="beerRating"><strong>Rating:</strong> {this.displayRating()}</div>
         <button className="rateBeer other" onClick={this.toggleRateBeer}>Rate Beer</button>
         {rateBeer}
