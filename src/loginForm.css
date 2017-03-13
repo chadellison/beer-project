@@ -4,6 +4,7 @@
   text-align: center;
   display: block;
   border: 1px solid gray;
+  background-color: white;
 }
 
 .credentialForm input {
